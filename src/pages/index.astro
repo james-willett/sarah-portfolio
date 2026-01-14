@@ -1,16 +1,90 @@
 ---
-
+// Import global styles to apply Tailwind + custom CSS
+import '../styles/global.css';
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Sarah's Portfolio - Setup Complete</title>
   </head>
-  <body>
-    <h1>Astro</h1>
+  <body class="bg-gray-50 text-gray-900">
+    <div class="min-h-screen flex items-center justify-center p-8">
+      <div class="max-w-2xl w-full space-y-8">
+        <!-- Header -->
+        <div class="text-center space-y-4">
+          <h1 class="text-5xl font-bold text-gray-900">
+            Phase 2 Complete! 🎉
+          </h1>
+          <p class="text-xl text-gray-600">
+            Astro + Tailwind CSS + TypeScript are working perfectly
+          </p>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="grid gap-6 md:grid-cols-2">
+          <!-- Astro Card -->
+          <div class="p-6 rounded-lg border-2 border-gray-200 bg-white">
+            <h2 class="text-2xl font-semibold mb-2 text-gray-900">✅ Astro</h2>
+            <p class="text-gray-600">
+              Static site generator running with hot reload
+            </p>
+          </div>
+
+          <!-- Tailwind Card -->
+          <div class="p-6 rounded-lg border-2 border-gray-200 bg-white">
+            <h2 class="text-2xl font-semibold mb-2 text-gray-900">✅ Tailwind CSS</h2>
+            <p class="text-gray-600">
+              Utility classes working with dark mode support
+            </p>
+          </div>
+
+          <!-- TypeScript Card -->
+          <div class="p-6 rounded-lg border-2 border-gray-200 bg-white">
+            <h2 class="text-2xl font-semibold mb-2 text-gray-900">✅ TypeScript</h2>
+            <p class="text-gray-600">
+              Strict mode enabled with Content Collections
+            </p>
+          </div>
+
+          <!-- MDX Card -->
+          <div class="p-6 rounded-lg border-2 border-gray-200 bg-white">
+            <h2 class="text-2xl font-semibold mb-2 text-gray-900">✅ MDX</h2>
+            <p class="text-gray-600">
+              Rich content support for portfolio projects
+            </p>
+          </div>
+        </div>
+
+        <!-- Color Demo -->
+        <div class="space-y-4">
+          <h3 class="text-2xl font-semibold text-center text-gray-900">Custom Color Palette</h3>
+          <div class="flex gap-4 justify-center flex-wrap">
+            <div class="w-20 h-20 rounded-lg bg-white border-2 border-gray-300" title="Background (White)"></div>
+            <div class="w-20 h-20 rounded-lg bg-gray-900" title="Foreground (Black)"></div>
+            <div class="w-20 h-20 rounded-lg bg-gray-500" title="Muted (Gray)"></div>
+            <div class="w-20 h-20 rounded-lg bg-blue-500" title="Accent (Blue)"></div>
+          </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="p-6 rounded-lg bg-blue-50 border-2 border-blue-200">
+          <h3 class="font-semibold mb-2 text-gray-900">✨ What's Working:</h3>
+          <ul class="space-y-1 text-sm text-gray-700">
+            <li>• Tailwind CSS v4 installed and compiling</li>
+            <li>• Inter font family loaded from Google Fonts</li>
+            <li>• Tailwind utility classes rendering correctly</li>
+            <li>• Content Collections schema ready for projects</li>
+            <li>• Hot reload - try editing this file and watch it update!</li>
+          </ul>
+          <p class="mt-4 text-sm text-gray-600 italic">
+            Note: Custom color system will be refined in Phase 3 with proper theme variables
+          </p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

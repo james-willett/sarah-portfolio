@@ -3,3 +3,59 @@
 
 /* Import Inter font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Define custom theme using Tailwind v4 @theme directive */
+@theme {
+  /* Custom semantic colors for light mode */
+  --color-background: #FFFFFF;
+  --color-foreground: #1A1A1A;
+  --color-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --color-accent: #000000;
+
+  /* Dark mode variants */
+  --color-background-dark: #0A0A0A;
+  --color-foreground-dark: #FFFFFF;
+  --color-muted-dark: #9CA3AF;
+  --color-border-dark: #374151;
+  --color-accent-dark: #FFFFFF;
+
+  /* Font family */
+  --font-family-sans: "Inter", system-ui, sans-serif;
+
+  /* Custom spacing */
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-128: 32rem;
+
+  /* Max width for content */
+  --width-content: 72rem;
+}
+
+/* Base styles - applies to entire document */
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* Dark mode styles */
+:root.dark body {
+  background-color: var(--color-background-dark);
+  color: var(--color-foreground-dark);
+}
+
+/* Smooth transitions for theme switching (when dark mode toggle is added) */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Improved focus indicators for accessibility - meets WCAG standards */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+:root.dark *:focus-visible {
+  outline-color: var(--color-accent-dark);
+}
