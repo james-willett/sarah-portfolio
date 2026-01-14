@@ -184,6 +184,7 @@ src/
 ### Content Schema
 
 **Project Frontmatter:**
+
 ```yaml
 title: string (required)
 description: string (required)
@@ -197,21 +198,25 @@ published: boolean (required)
 ### Design System
 
 **Colors:**
+
 - Light mode: White background (#FFFFFF), dark text (#1A1A1A)
 - Dark mode: Dark background (#0A0A0A), light text (#FFFFFF)
 - Accent colors: Customizable via Tailwind config
 
 **Typography:**
+
 - Font family: Inter (web font)
 - Type scale: Tailwind's default extended with custom sizes
 - Line height: 1.5 for body, 1.2 for headings
 
 **Spacing:**
+
 - Based on Tailwind's spacing scale (4px increments)
 - Container max-width: 1280px
 - Section padding: responsive (4rem on desktop, 2rem on mobile)
 
 **Components:**
+
 - Pill-button navigation (as shown in reference images)
 - Clean, minimal card designs for projects and blog posts
 - Subtle hover states and transitions
@@ -307,18 +312,21 @@ Before considering the project "done," verify:
 ### Quality Gates
 
 **Code Quality:**
+
 - TypeScript must compile with zero errors
 - ESLint must pass with zero errors
 - Prettier formatting must be consistent
 - No console errors in browser (except dev mode warnings)
 
 **Content Quality:**
+
 - All text proofread (no typos)
 - All images have descriptive alt text
 - All links work (no broken links)
 - Placeholder content clearly marked for Sarah to replace
 
 **Performance Quality:**
+
 - Total JavaScript < 50KB gzipped
 - Largest Contentful Paint < 2.5s
 - Cumulative Layout Shift < 0.1
@@ -362,6 +370,7 @@ Before considering the project "done," verify:
 ### Success Metrics
 
 **Post-Launch (Nice to Have)**
+
 - Page views per month
 - Average time on site
 - Contact form submission rate
@@ -378,6 +387,7 @@ Before considering the project "done," verify:
 ## Approval & Sign-off
 
 **Definition of Done Confirmed:**
+
 - All "Success Criteria" items marked ✅
 - All "Testing Checklist" items verified
 - Site is live and accessible
