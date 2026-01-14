@@ -1,0 +1,114 @@
+---
+/**
+ * ProjectCard - Portfolio project card component
+ *
+ * Displays a project thumbnail, title, description, and tags with hover effects.
+ * Used on the homepage (featured projects) and portfolio grid page.
+ *
+ * Props:
+ * - title: Project title
+ * - description: Brief project description
+ * - image: Project thumbnail image (Astro Image component compatible)
+ * - imageAlt: Alt text for the image
+ * - href: Link to project detail page
+ * - tags: Array of project tags
+ * - featured: Whether this is a featured project (optional, for styling variants)
+ *
+ * Design Notes:
+ * - Clean card with subtle border and shadow (matching reference images)
+ * - Hover effects: slight lift and shadow increase
+ * - Tags displayed as pill-shaped badges
+ * - Responsive image that maintains aspect ratio
+ * - Dark mode support throughout
+ */
+
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  href: string;
+  tags: string[];
+  featured?: boolean;
+}
+
+const { title, description, image, imageAlt, href, tags, featured = false } = Astro.props;
+---
+
+<article
+  class={`
+    group relative overflow-hidden rounded-xl
+    bg-white dark:bg-zinc-900
+    border border-border dark:border-border-dark
+    shadow-sm hover:shadow-lg
+    transition-all duration-300 ease-out
+    hover:-translate-y-1
+    ${featured ? 'ring-1 ring-accent/10 dark:ring-accent-dark/10' : ''}
+  `}
+>
+  <a href={href} class="block">
+    <!-- Project Image -->
+    <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+      <Image
+        src={image}
+        alt={imageAlt}
+        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+        widths={[400, 600, 800]}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+
+      <!-- Overlay that appears on hover -->
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        aria-hidden="true"
+      />
+    </div>
+
+    <!-- Project Content -->
+    <div class="p-6">
+      <!-- Title -->
+      <h3 class="text-xl font-semibold text-foreground dark:text-foreground-dark mb-2 group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+        {title}
+      </h3>
+
+      <!-- Description -->
+      <p class="text-muted dark:text-muted-dark text-sm leading-relaxed mb-4 line-clamp-3">
+        {description}
+      </p>
+
+      <!-- Tags -->
+      {tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-foreground/80 dark:text-foreground-dark/80 border border-border/50 dark:border-border-dark/50">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- Visual indicator for link (appears on hover) -->
+    <div
+      class="absolute bottom-6 right-6 w-8 h-8 flex items-center justify-center rounded-full bg-accent dark:bg-accent-dark text-background dark:text-background-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      aria-hidden="true"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  </a>
+</article>
+
+<style>
+  /* Line clamp utility for description truncation */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

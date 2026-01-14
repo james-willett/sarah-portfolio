@@ -1,0 +1,106 @@
+---
+/**
+ * ThemeToggle - Button to toggle between light and dark mode
+ *
+ * Features:
+ * - Sun icon for light mode, moon icon for dark mode
+ * - Smooth transition animation
+ * - Accessible (aria-label, keyboard support)
+ * - Uses theme.ts utilities for state management
+ */
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="p-2 rounded-full text-foreground dark:text-foreground-dark hover:bg-border/50 dark:hover:bg-border-dark/50 transition-colors"
+  aria-label="Toggle theme"
+>
+  <!-- Sun Icon (visible in dark mode, click to switch to light) -->
+  <svg
+    id="theme-toggle-sun"
+    class="w-5 h-5 hidden dark:block"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+    />
+  </svg>
+
+  <!-- Moon Icon (visible in light mode, click to switch to dark) -->
+  <svg
+    id="theme-toggle-moon"
+    class="w-5 h-5 block dark:hidden"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+    />
+  </svg>
+</button>
+
+<script>
+  import { toggleTheme, getTheme } from '../scripts/theme';
+
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('theme-toggle');
+
+  if (themeToggle) {
+    // Add click handler to toggle theme
+    themeToggle.addEventListener('click', () => {
+      const newTheme = toggleTheme();
+
+      // Update aria-label for accessibility
+      themeToggle.setAttribute(
+        'aria-label',
+        `Switch to ${newTheme === 'dark' ? 'light' : 'dark'} mode`
+      );
+
+      // Optional: Dispatch custom event for other components to listen to
+      window.dispatchEvent(
+        new CustomEvent('theme-changed', { detail: { theme: newTheme } })
+      );
+    });
+
+    // Set initial aria-label based on current theme
+    const currentTheme = getTheme();
+    themeToggle.setAttribute(
+      'aria-label',
+      `Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} mode`
+    );
+  }
+</script>
+
+<style>
+  /* Add smooth rotation animation when toggling */
+  #theme-toggle {
+    position: relative;
+  }
+
+  #theme-toggle svg {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  #theme-toggle:active svg {
+    transform: rotate(180deg);
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    #theme-toggle svg {
+      transition: none;
+    }
+  }
+</style>

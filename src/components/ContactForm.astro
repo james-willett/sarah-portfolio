@@ -1,0 +1,319 @@
+---
+/**
+ * ContactForm - Contact form with Netlify integration
+ *
+ * A fully functional contact form with client-side validation and Netlify Forms integration.
+ * Includes success/error message handling and accessible form fields.
+ *
+ * Features:
+ * - Netlify Forms integration (automatic spam filtering)
+ * - Client-side validation for required fields and email format
+ * - Accessible labels and error messages
+ * - Loading state during submission
+ * - Success/error message display
+ * - Dark mode support
+ * - Uses Button component for submit action
+ *
+ * Design Notes:
+ * - Clean, minimal form design matching site aesthetic
+ * - Clear error states with red borders and messages
+ * - Success state with green message
+ * - Proper focus indicators for accessibility
+ * - All fields required with validation
+ */
+
+import Button from './Button.astro';
+---
+
+<div class="w-full max-w-2xl">
+  <!-- Success Message (hidden by default) -->
+  <div
+    id="form-success"
+    class="hidden mb-6 p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
+    role="alert"
+  >
+    <p class="font-medium">Message sent successfully!</p>
+    <p class="text-sm mt-1">Thank you for reaching out. I'll get back to you soon.</p>
+  </div>
+
+  <!-- Error Message (hidden by default) -->
+  <div
+    id="form-error"
+    class="hidden mb-6 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200"
+    role="alert"
+  >
+    <p class="font-medium">Something went wrong</p>
+    <p class="text-sm mt-1" id="error-message">Please try again later or email me directly.</p>
+  </div>
+
+  <!-- Contact Form -->
+  <form
+    id="contact-form"
+    name="contact"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    class="space-y-6"
+  >
+    <!-- Hidden field for Netlify -->
+    <input type="hidden" name="form-name" value="contact" />
+
+    <!-- Honeypot field for spam protection (hidden from users) -->
+    <div class="hidden" aria-hidden="true">
+      <label>
+        Don't fill this out if you're human:
+        <input name="bot-field" />
+      </label>
+    </div>
+
+    <!-- Name Field -->
+    <div>
+      <label
+        for="name"
+        class="block text-sm font-medium text-foreground dark:text-foreground-dark mb-2"
+      >
+        Name <span class="text-red-500" aria-label="required">*</span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        class="w-full px-4 py-3 rounded-lg border border-border dark:border-border-dark bg-white dark:bg-zinc-900 text-foreground dark:text-foreground-dark placeholder-muted dark:placeholder-muted-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:border-transparent transition-colors"
+        placeholder="Your name"
+        aria-required="true"
+      />
+      <p id="name-error" class="hidden mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
+        Please enter your name
+      </p>
+    </div>
+
+    <!-- Email Field -->
+    <div>
+      <label
+        for="email"
+        class="block text-sm font-medium text-foreground dark:text-foreground-dark mb-2"
+      >
+        Email <span class="text-red-500" aria-label="required">*</span>
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        class="w-full px-4 py-3 rounded-lg border border-border dark:border-border-dark bg-white dark:bg-zinc-900 text-foreground dark:text-foreground-dark placeholder-muted dark:placeholder-muted-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:border-transparent transition-colors"
+        placeholder="your.email@example.com"
+        aria-required="true"
+      />
+      <p id="email-error" class="hidden mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
+        Please enter a valid email address
+      </p>
+    </div>
+
+    <!-- Message Field -->
+    <div>
+      <label
+        for="message"
+        class="block text-sm font-medium text-foreground dark:text-foreground-dark mb-2"
+      >
+        Message <span class="text-red-500" aria-label="required">*</span>
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        required
+        rows="6"
+        class="w-full px-4 py-3 rounded-lg border border-border dark:border-border-dark bg-white dark:bg-zinc-900 text-foreground dark:text-foreground-dark placeholder-muted dark:placeholder-muted-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:border-transparent transition-colors resize-y"
+        placeholder="Tell me about your project..."
+        aria-required="true"
+      ></textarea>
+      <p id="message-error" class="hidden mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
+        Please enter a message
+      </p>
+    </div>
+
+    <!-- Submit Button -->
+    <div>
+      <button
+        type="submit"
+        id="submit-button"
+        class="w-full inline-flex items-center justify-center px-6 py-3 text-base rounded-full font-medium bg-accent dark:bg-accent-dark text-background dark:text-background-dark hover:opacity-90 active:scale-95 shadow-sm hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-dark focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <span id="button-text">Send Message</span>
+        <svg
+          id="button-spinner"
+          class="hidden w-5 h-5 ml-2 animate-spin"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          />
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          />
+        </svg>
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Client-side form validation and submission handling
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitButton = document.getElementById('submit-button') as HTMLButtonElement;
+  const buttonText = document.getElementById('button-text') as HTMLSpanElement;
+  const buttonSpinner = document.getElementById('button-spinner') as SVGElement;
+  const successMessage = document.getElementById('form-success') as HTMLDivElement;
+  const errorMessage = document.getElementById('form-error') as HTMLDivElement;
+
+  // Form fields
+  const nameInput = document.getElementById('name') as HTMLInputElement;
+  const emailInput = document.getElementById('email') as HTMLInputElement;
+  const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+
+  // Error message elements
+  const nameError = document.getElementById('name-error') as HTMLParagraphElement;
+  const emailError = document.getElementById('email-error') as HTMLParagraphElement;
+  const messageError = document.getElementById('message-error') as HTMLParagraphElement;
+
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Hide error message for a field
+  function hideError(input: HTMLInputElement | HTMLTextAreaElement, error: HTMLParagraphElement) {
+    input.classList.remove('border-red-500', 'dark:border-red-400');
+    error.classList.add('hidden');
+  }
+
+  // Show error message for a field
+  function showError(input: HTMLInputElement | HTMLTextAreaElement, error: HTMLParagraphElement) {
+    input.classList.add('border-red-500', 'dark:border-red-400');
+    error.classList.remove('hidden');
+  }
+
+  // Validate individual field
+  function validateField(input: HTMLInputElement | HTMLTextAreaElement, error: HTMLParagraphElement, validator?: (value: string) => boolean): boolean {
+    const value = input.value.trim();
+
+    if (!value) {
+      showError(input, error);
+      return false;
+    }
+
+    if (validator && !validator(value)) {
+      showError(input, error);
+      return false;
+    }
+
+    hideError(input, error);
+    return true;
+  }
+
+  // Validate all fields
+  function validateForm(): boolean {
+    const isNameValid = validateField(nameInput, nameError);
+    const isEmailValid = validateField(emailInput, emailError, (value) => emailRegex.test(value));
+    const isMessageValid = validateField(messageInput, messageError);
+
+    return isNameValid && isEmailValid && isMessageValid;
+  }
+
+  // Real-time validation on blur
+  nameInput.addEventListener('blur', () => validateField(nameInput, nameError));
+  emailInput.addEventListener('blur', () => validateField(emailInput, emailError, (value) => emailRegex.test(value)));
+  messageInput.addEventListener('blur', () => validateField(messageInput, messageError));
+
+  // Clear errors on input
+  nameInput.addEventListener('input', () => hideError(nameInput, nameError));
+  emailInput.addEventListener('input', () => hideError(emailInput, emailError));
+  messageInput.addEventListener('input', () => hideError(messageInput, messageError));
+
+  // Form submission handler
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Hide previous messages
+      successMessage.classList.add('hidden');
+      errorMessage.classList.add('hidden');
+
+      // Validate form
+      if (!validateForm()) {
+        // Scroll to first error
+        const firstError = form.querySelector('.border-red-500');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+
+      // Show loading state
+      submitButton.disabled = true;
+      buttonText.textContent = 'Sending...';
+      buttonSpinner.classList.remove('hidden');
+
+      try {
+        // Submit form data to Netlify
+        const formData = new FormData(form);
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData as any).toString(),
+        });
+
+        if (response.ok) {
+          // Show success message
+          successMessage.classList.remove('hidden');
+          successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Reset form
+          form.reset();
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        // Show error message
+        errorMessage.classList.remove('hidden');
+        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        console.error('Form submission error:', error);
+      } finally {
+        // Reset button state
+        submitButton.disabled = false;
+        buttonText.textContent = 'Send Message';
+        buttonSpinner.classList.add('hidden');
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Ensure smooth transitions respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none;
+      animation: none;
+    }
+  }
+
+  /* Spinner animation */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+</style>

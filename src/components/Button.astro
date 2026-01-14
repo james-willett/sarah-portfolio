@@ -1,0 +1,130 @@
+---
+/**
+ * Button - Reusable button component
+ *
+ * A versatile button component with multiple variants, sizes, and states.
+ * Supports both button and link (anchor) elements depending on whether href is provided.
+ *
+ * Props:
+ * - variant: Button style variant (primary, secondary, outline, ghost)
+ * - size: Button size (sm, md, lg)
+ * - href: Optional URL - if provided, renders as link instead of button
+ * - type: Button type attribute (button, submit, reset) - only used when href is not provided
+ * - disabled: Disabled state
+ * - loading: Loading state (shows spinner, disables interaction)
+ * - className: Additional CSS classes to apply
+ *
+ * Design Notes:
+ * - Primary: Solid accent color (matches navigation active state)
+ * - Secondary: Subtle background with hover effect
+ * - Outline: Border only, transparent background
+ * - Ghost: No background or border, minimal style
+ * - All variants support dark mode
+ * - Pill-shaped (rounded-full) to match navigation style
+ * - Loading state shows spinner icon
+ */
+
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  loading?: boolean;
+  className?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  loading = false,
+  className = '',
+} = Astro.props;
+
+// Base classes applied to all buttons
+const baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-dark focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+
+// Size variants
+const sizeClasses = {
+  sm: 'px-3 py-1.5 text-xs rounded-full',
+  md: 'px-4 py-2 text-sm rounded-full',
+  lg: 'px-6 py-3 text-base rounded-full',
+};
+
+// Style variants
+const variantClasses = {
+  primary: 'bg-accent dark:bg-accent-dark text-background dark:text-background-dark hover:opacity-90 active:scale-95 shadow-sm hover:shadow-md',
+  secondary: 'bg-zinc-100 dark:bg-zinc-800 text-foreground dark:text-foreground-dark hover:bg-zinc-200 dark:hover:bg-zinc-700 active:scale-95',
+  outline: 'border border-border dark:border-border-dark text-foreground dark:text-foreground-dark hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95',
+  ghost: 'text-foreground dark:text-foreground-dark hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95',
+};
+
+// Combine all classes
+const allClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`;
+
+// Determine if we should render as link or button
+const Element = href ? 'a' : 'button';
+
+// Props for the element
+const elementProps = href
+  ? { href, class: allClasses }
+  : {
+      type,
+      class: allClasses,
+      disabled: disabled || loading,
+      'aria-disabled': disabled || loading ? 'true' : 'false',
+    };
+---
+
+<Element {...elementProps}>
+  {loading && (
+    <svg
+      class="w-4 h-4 mr-2 animate-spin"
+      fill="none"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      />
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      />
+    </svg>
+  )}
+  <slot />
+</Element>
+
+<style>
+  /* Ensure smooth transitions respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    button, a {
+      transition: none;
+      animation: none;
+    }
+  }
+
+  /* Spinner animation */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+</style>

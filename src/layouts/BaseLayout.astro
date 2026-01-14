@@ -1,0 +1,111 @@
+---
+/**
+ * BaseLayout - Main layout wrapper for all pages
+ *
+ * Provides:
+ * - HTML document structure
+ * - SEO meta tags (title, description, OG tags)
+ * - Dark mode detection script (prevents flash of wrong theme)
+ * - Global styles
+ * - Consistent header and footer
+ */
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+// Default SEO values
+const {
+  title = "Sarah - UX Designer",
+  description = "Portfolio showcasing thoughtful UX design work",
+  image = "/og-image.jpg", // Default OG image - needs to be added to public/
+  type = "website"
+} = Astro.props;
+
+// Site metadata from config
+const siteUrl = Astro.site || 'https://sarah-portfolio.netlify.app';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+
+// Format title for display (append site name for non-home pages)
+const fullTitle = title.includes('Sarah') ? title : `${title} | Sarah`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, siteUrl)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={fullTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, siteUrl)} />
+
+    <!-- Dark Mode Prevention Script -->
+    <!-- This runs immediately before page paint to prevent flash of wrong theme -->
+    <script is:inline>
+      // Immediately check and apply theme before page renders
+      (function() {
+        // Check localStorage first, then system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Apply dark class if user preference or system preference indicates dark mode
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
+    <!-- Google Analytics (optional - will be added later if needed) -->
+    <!-- {import.meta.env.PUBLIC_GA_TRACKING_ID && (
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_TRACKING_ID}`}></script>
+      <script is:inline define:vars={{ gaId: import.meta.env.PUBLIC_GA_TRACKING_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gaId);
+      </script>
+    )} -->
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Site Header -->
+    <Header />
+
+    <!-- Page content goes here via slot -->
+    <slot />
+
+    <!-- Site Footer -->
+    <Footer />
+  </body>
+</html>
+
+<style>
+  /* Import global styles */
+  @import '../styles/global.css';
+</style>

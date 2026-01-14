@@ -1,0 +1,150 @@
+---
+/**
+ * ProjectLayout - Layout for individual project/case study pages
+ *
+ * Extends BaseLayout with project-specific features:
+ * - Project metadata in SEO tags
+ * - Hero section with project details
+ * - Structured content area for case study
+ * - Back navigation link
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, client, role, timeline, liveUrl, thumbnail } = project.data;
+
+// Generate OG image from project thumbnail (if available)
+const ogImage = thumbnail?.src || '/og-image.jpg';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={ogImage}
+  type="article"
+>
+  <main class="flex-1">
+    <!-- Project Hero Section -->
+    <section class="py-12 md:py-16 px-6">
+      <div class="max-w-content mx-auto">
+        <!-- Back Link -->
+        <a
+          href="/design"
+          class="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground dark:text-muted-dark dark:hover:text-foreground-dark mb-8 transition-colors"
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to Design
+        </a>
+
+        <!-- Project Title -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground dark:text-foreground-dark">
+          {title}
+        </h1>
+
+        <!-- Project Description -->
+        <p class="text-lg md:text-xl text-muted dark:text-muted-dark mb-8 max-w-3xl">
+          {description}
+        </p>
+
+        <!-- Project Metadata -->
+        <div class="flex flex-wrap gap-6 md:gap-8 text-sm border-t border-border dark:border-border-dark pt-6">
+          {client && (
+            <div>
+              <dt class="text-muted dark:text-muted-dark mb-1">Client</dt>
+              <dd class="text-foreground dark:text-foreground-dark font-medium">{client}</dd>
+            </div>
+          )}
+          {role && (
+            <div>
+              <dt class="text-muted dark:text-muted-dark mb-1">Role</dt>
+              <dd class="text-foreground dark:text-foreground-dark font-medium">{role}</dd>
+            </div>
+          )}
+          {timeline && (
+            <div>
+              <dt class="text-muted dark:text-muted-dark mb-1">Timeline</dt>
+              <dd class="text-foreground dark:text-foreground-dark font-medium">{timeline}</dd>
+            </div>
+          )}
+          {liveUrl && (
+            <div>
+              <dt class="text-muted dark:text-muted-dark mb-1">Live Site</dt>
+              <dd>
+                <a
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-accent dark:text-accent-dark hover:underline font-medium inline-flex items-center gap-1"
+                >
+                  View Project
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 8.66667V12.6667C12 13.0203 11.8595 13.3594 11.6095 13.6095C11.3594 13.8595 11.0203 14 10.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V5.33333C2 4.97971 2.14048 4.64057 2.39052 4.39052C2.64057 4.14048 2.97971 4 3.33333 4H7.33333M10 2H14M14 2V6M14 2L6.66667 9.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </dd>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study Content -->
+    <article class="px-6 pb-16 md:pb-24">
+      <div class="max-w-content mx-auto prose prose-lg dark:prose-invert">
+        <!-- MDX content will be rendered here -->
+        <slot />
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Prose styling for case study content */
+  .prose {
+    max-width: 65ch;
+  }
+
+  .prose h2 {
+    @apply text-3xl font-bold mt-12 mb-4 text-foreground dark:text-foreground-dark;
+  }
+
+  .prose h3 {
+    @apply text-2xl font-semibold mt-8 mb-3 text-foreground dark:text-foreground-dark;
+  }
+
+  .prose h4 {
+    @apply text-xl font-semibold mt-6 mb-2 text-foreground dark:text-foreground-dark;
+  }
+
+  .prose p {
+    @apply text-base leading-relaxed mb-4 text-foreground dark:text-foreground-dark;
+  }
+
+  .prose a {
+    @apply text-accent dark:text-accent-dark hover:underline;
+  }
+
+  .prose ul, .prose ol {
+    @apply my-4 ml-6;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose img {
+    @apply rounded-lg my-8;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-accent dark:border-accent-dark pl-4 italic my-6;
+  }
+</style>

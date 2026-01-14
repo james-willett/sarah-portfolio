@@ -1,0 +1,180 @@
+---
+/**
+ * Header - Main navigation component
+ *
+ * Features:
+ * - Config-driven navigation items (from astro.config.mjs)
+ * - Responsive mobile menu (hamburger on small screens)
+ * - Theme toggle button
+ * - Active page highlighting
+ * - Dark mode support
+ */
+
+import { siteConfig } from '../../astro.config.mjs';
+import ThemeToggle from './ThemeToggle.astro';
+
+// Get current path for active link highlighting
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-background dark:bg-background-dark border-b border-border dark:border-border-dark">
+  <nav class="max-w-content mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo / Site Title -->
+      <a
+        href="/"
+        class="text-xl font-bold text-foreground dark:text-foreground-dark hover:text-accent dark:hover:text-accent-dark transition-colors"
+      >
+        Sarah
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-2">
+        {siteConfig.nav.map((item) => {
+          const isActive = currentPath === item.href ||
+                          (item.href !== '/' && currentPath.startsWith(item.href));
+          return (
+            <a
+              href={item.href}
+              class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                isActive
+                  ? 'bg-accent dark:bg-accent-dark text-background dark:text-background-dark'
+                  : 'text-foreground dark:text-foreground-dark hover:bg-border/50 dark:hover:bg-border-dark/50'
+              }`}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+
+        <!-- Theme Toggle -->
+        <div class="ml-2">
+          <ThemeToggle />
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-button"
+        type="button"
+        class="md:hidden p-2 text-foreground dark:text-foreground-dark hover:text-accent dark:hover:text-accent-dark transition-colors"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <!-- Hamburger Icon -->
+        <svg
+          id="menu-icon-open"
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+        <!-- Close Icon (hidden by default) -->
+        <svg
+          id="menu-icon-close"
+          class="w-6 h-6 hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Menu (hidden by default) -->
+    <div
+      id="mobile-menu"
+      class="md:hidden hidden mt-4 pb-4 border-t border-border dark:border-border-dark pt-4"
+    >
+      <div class="flex flex-col gap-2">
+        {siteConfig.nav.map((item) => {
+          const isActive = currentPath === item.href ||
+                          (item.href !== '/' && currentPath.startsWith(item.href));
+          return (
+            <a
+              href={item.href}
+              class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                isActive
+                  ? 'bg-accent dark:bg-accent-dark text-background dark:text-background-dark'
+                  : 'text-foreground dark:text-foreground-dark hover:bg-border/50 dark:hover:bg-border-dark/50'
+              }`}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+
+        <!-- Theme Toggle in Mobile Menu -->
+        <div class="mt-2 flex justify-center">
+          <ThemeToggle />
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle functionality
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIconOpen = document.getElementById('menu-icon-open');
+  const menuIconClose = document.getElementById('menu-icon-close');
+
+  if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+
+      // Toggle menu visibility
+      mobileMenu.classList.toggle('hidden');
+
+      // Toggle icons
+      menuIconOpen.classList.toggle('hidden');
+      menuIconClose.classList.toggle('hidden');
+
+      // Update aria-expanded
+      mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('header')) {
+        mobileMenu.classList.add('hidden');
+        menuIconOpen.classList.remove('hidden');
+        menuIconClose.classList.add('hidden');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close mobile menu when window is resized to desktop size
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        mobileMenu.classList.add('hidden');
+        menuIconOpen.classList.remove('hidden');
+        menuIconClose.classList.add('hidden');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Ensure header backdrop blur works on supported browsers */
+  header {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+</style>
