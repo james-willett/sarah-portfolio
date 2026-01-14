@@ -1,39 +1,69 @@
 ---
 /**
- * Button - Reusable button component
+ * Button - Reusable button component with multiple variants and sizes
  *
- * A versatile button component with multiple variants, sizes, and states.
- * Supports both button and link (anchor) elements depending on whether href is provided.
+ * A versatile, accessible button component that matches Sarah's design aesthetic.
+ * Features pill-shaped styling consistent with the navigation buttons, supporting
+ * multiple variants (primary, secondary, outline, ghost) and sizes (sm, md, lg).
  *
- * Props:
- * - variant: Button style variant (primary, secondary, outline, ghost)
- * - size: Button size (sm, md, lg)
- * - href: Optional URL - if provided, renders as link instead of button
- * - type: Button type attribute (button, submit, reset) - only used when href is not provided
- * - disabled: Disabled state
- * - loading: Loading state (shows spinner, disables interaction)
- * - className: Additional CSS classes to apply
+ * @description The button supports both button and anchor element rendering based on
+ * whether an href prop is provided. It includes loading and disabled states with
+ * appropriate visual feedback and ARIA attributes for accessibility.
  *
- * Design Notes:
- * - Primary: Solid accent color (matches navigation active state)
- * - Secondary: Subtle background with hover effect
- * - Outline: Border only, transparent background
- * - Ghost: No background or border, minimal style
- * - All variants support dark mode
- * - Pill-shaped (rounded-full) to match navigation style
- * - Loading state shows spinner icon
+ * @example
+ * ```astro
+ * <!-- Primary button -->
+ * <Button variant="primary">Get Started</Button>
+ *
+ * <!-- Link styled as button -->
+ * <Button variant="outline" href="/contact">Contact Me</Button>
+ *
+ * <!-- Button with icon -->
+ * <Button variant="secondary">
+ *   <Fragment slot="icon-left">
+ *     <svg>...</svg>
+ *   </Fragment>
+ *   Download
+ * </Button>
+ *
+ * <!-- Loading state -->
+ * <Button loading={true}>Submitting...</Button>
+ * ```
+ *
+ * @component Button
+ * @prop {'primary'|'secondary'|'outline'|'ghost'} [variant='primary'] - Visual style variant
+ * @prop {'sm'|'md'|'lg'} [size='md'] - Button size
+ * @prop {string} [href] - If provided, renders as anchor tag instead of button
+ * @prop {'button'|'submit'|'reset'} [type='button'] - Button type (only for button element)
+ * @prop {boolean} [disabled=false] - Disabled state
+ * @prop {boolean} [loading=false] - Loading state with spinner
+ * @prop {string} [className] - Additional CSS classes
+ * @slot default - Button text content
+ * @slot icon-left - Optional icon to display before text
+ * @slot icon-right - Optional icon to display after text
  */
 
+/**
+ * Props interface for the Button component
+ */
 interface Props {
+  /** Visual style variant of the button */
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  /** Size of the button */
   size?: 'sm' | 'md' | 'lg';
+  /** If provided, renders as anchor tag instead of button */
   href?: string;
+  /** Button type attribute (only used when href is not provided) */
   type?: 'button' | 'submit' | 'reset';
+  /** Whether the button is disabled */
   disabled?: boolean;
+  /** Whether to show loading spinner (disables interaction) */
   loading?: boolean;
+  /** Additional CSS classes to apply */
   className?: string;
 }
 
+// Destructure props with defaults
 const {
   variant = 'primary',
   size = 'md',
@@ -43,6 +73,10 @@ const {
   loading = false,
   className = '',
 } = Astro.props;
+
+// Check if icon slots are being used
+const hasIconLeft = Astro.slots.has('icon-left');
+const hasIconRight = Astro.slots.has('icon-right');
 
 // Base classes applied to all buttons
 const baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-dark focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
@@ -54,12 +88,12 @@ const sizeClasses = {
   lg: 'px-6 py-3 text-base rounded-full',
 };
 
-// Style variants
+// Style variants - Using explicit colors from Figma (#3F3F3F for text)
 const variantClasses = {
-  primary: 'bg-accent dark:bg-accent-dark text-background dark:text-background-dark hover:opacity-90 active:scale-95 shadow-sm hover:shadow-md',
-  secondary: 'bg-zinc-100 dark:bg-zinc-800 text-foreground dark:text-foreground-dark hover:bg-zinc-200 dark:hover:bg-zinc-700 active:scale-95',
-  outline: 'border border-border dark:border-border-dark text-foreground dark:text-foreground-dark hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95',
-  ghost: 'text-foreground dark:text-foreground-dark hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95',
+  primary: 'bg-[#3F3F3F] dark:bg-gray-100 text-white dark:text-gray-900 hover:opacity-90 active:scale-95 shadow-sm hover:shadow-md',
+  secondary: 'bg-zinc-100 dark:bg-zinc-800 text-[#3F3F3F] dark:text-gray-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 active:scale-95',
+  outline: 'border border-[#3F3F3F] dark:border-gray-400 text-[#3F3F3F] dark:text-gray-200 hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95',
+  ghost: 'text-[#3F3F3F] dark:text-gray-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95',
 };
 
 // Combine all classes
@@ -80,6 +114,7 @@ const elementProps = href
 ---
 
 <Element {...elementProps}>
+  <!-- Loading spinner (shown when loading=true) -->
   {loading && (
     <svg
       class="w-4 h-4 mr-2 animate-spin"
@@ -102,7 +137,23 @@ const elementProps = href
       />
     </svg>
   )}
+
+  <!-- Left icon slot (optional) -->
+  {!loading && hasIconLeft && (
+    <span class="mr-2 inline-flex items-center">
+      <slot name="icon-left" />
+    </span>
+  )}
+
+  <!-- Default slot for button text -->
   <slot />
+
+  <!-- Right icon slot (optional) -->
+  {hasIconRight && (
+    <span class="ml-2 inline-flex items-center">
+      <slot name="icon-right" />
+    </span>
+  )}
 </Element>
 
 <style>

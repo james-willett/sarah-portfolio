@@ -1,13 +1,14 @@
 ---
 /**
- * Header - Main navigation component
+ * Header - Floating pill navigation component
  *
- * Features:
- * - Config-driven navigation items (from astro.config.mjs)
- * - Responsive mobile menu (hamburger on small screens)
- * - Theme toggle button
- * - Active page highlighting
- * - Dark mode support
+ * Matches Sarah's Figma design:
+ * - Centered floating pill navigation
+ * - White/light background with subtle shadow
+ * - border-radius: 100px (fully rounded)
+ * - padding: 8px, gap: 8px
+ * - Active state shows filled dark background
+ * - Responsive mobile menu
  */
 
 import { siteConfig } from '../../astro.config.mjs';
@@ -17,18 +18,24 @@ import ThemeToggle from './ThemeToggle.astro';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 bg-background dark:bg-background-dark border-b border-border dark:border-border-dark">
-  <nav class="max-w-content mx-auto px-6 py-4">
-    <div class="flex items-center justify-between">
-      <!-- Logo / Site Title -->
-      <a
-        href="/"
-        class="text-xl font-bold text-foreground dark:text-foreground-dark hover:text-accent dark:hover:text-accent-dark transition-colors"
-      >
-        Sarah
-      </a>
-
-      <!-- Desktop Navigation -->
+<header class="fixed top-0 left-0 right-0 z-50 pt-6 px-4">
+  <!-- Centered floating navigation pill -->
+  <nav class="flex justify-center">
+    <!--
+      Navigation pill container
+      Figma specs:
+      - display: inline-flex
+      - padding: 8px
+      - gap: 8px
+      - border-radius: 100px
+      - box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1)
+      - background: white
+      - Size: ~440px × 58px
+    -->
+    <div
+      class="inline-flex items-center p-2 gap-2 rounded-full bg-white dark:bg-zinc-800 shadow-nav"
+    >
+      <!-- Desktop Navigation - Using explicit colors from Figma (#3F3F3F) -->
       <div class="hidden md:flex items-center gap-2">
         {siteConfig.nav.map((item) => {
           const isActive = currentPath === item.href ||
@@ -36,35 +43,30 @@ const currentPath = Astro.url.pathname;
           return (
             <a
               href={item.href}
-              class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              class={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                 isActive
-                  ? 'bg-accent dark:bg-accent-dark text-background dark:text-background-dark'
-                  : 'text-foreground dark:text-foreground-dark hover:bg-border/50 dark:hover:bg-border-dark/50'
+                  ? 'bg-[#3F3F3F] dark:bg-gray-100 text-white dark:text-gray-900'
+                  : 'text-[#3F3F3F] dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
               {item.label}
             </a>
           );
         })}
-
-        <!-- Theme Toggle -->
-        <div class="ml-2">
-          <ThemeToggle />
-        </div>
       </div>
 
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
         type="button"
-        class="md:hidden p-2 text-foreground dark:text-foreground-dark hover:text-accent dark:hover:text-accent-dark transition-colors"
+        class="md:hidden p-2 text-[#3F3F3F] dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
         aria-label="Toggle menu"
         aria-expanded="false"
       >
         <!-- Hamburger Icon -->
         <svg
           id="menu-icon-open"
-          class="w-6 h-6"
+          class="w-5 h-5"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -79,7 +81,7 @@ const currentPath = Astro.url.pathname;
         <!-- Close Icon (hidden by default) -->
         <svg
           id="menu-icon-close"
-          class="w-6 h-6 hidden"
+          class="w-5 h-5 hidden"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -92,39 +94,42 @@ const currentPath = Astro.url.pathname;
           />
         </svg>
       </button>
-    </div>
 
-    <!-- Mobile Navigation Menu (hidden by default) -->
-    <div
-      id="mobile-menu"
-      class="md:hidden hidden mt-4 pb-4 border-t border-border dark:border-border-dark pt-4"
-    >
-      <div class="flex flex-col gap-2">
-        {siteConfig.nav.map((item) => {
-          const isActive = currentPath === item.href ||
-                          (item.href !== '/' && currentPath.startsWith(item.href));
-          return (
-            <a
-              href={item.href}
-              class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                isActive
-                  ? 'bg-accent dark:bg-accent-dark text-background dark:text-background-dark'
-                  : 'text-foreground dark:text-foreground-dark hover:bg-border/50 dark:hover:bg-border-dark/50'
-              }`}
-            >
-              {item.label}
-            </a>
-          );
-        })}
-
-        <!-- Theme Toggle in Mobile Menu -->
-        <div class="mt-2 flex justify-center">
-          <ThemeToggle />
-        </div>
+      <!-- Theme Toggle (always visible) -->
+      <div class="ml-1">
+        <ThemeToggle />
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Navigation Menu (dropdown below the pill) -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden mt-2 flex justify-center"
+  >
+    <div class="inline-flex flex-col p-3 gap-2 rounded-2xl bg-white dark:bg-zinc-800 shadow-nav">
+      {siteConfig.nav.map((item) => {
+        const isActive = currentPath === item.href ||
+                        (item.href !== '/' && currentPath.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 text-center ${
+              isActive
+                ? 'bg-[#3F3F3F] dark:bg-gray-100 text-white dark:text-gray-900'
+                : 'text-[#3F3F3F] dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
+            }`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </div>
+  </div>
 </header>
+
+<!-- Spacer to push content below fixed header -->
+<div class="h-24"></div>
 
 <script>
   // Mobile menu toggle functionality
@@ -172,7 +177,12 @@ const currentPath = Astro.url.pathname;
 </script>
 
 <style>
-  /* Ensure header backdrop blur works on supported browsers */
+  /* Custom shadow for navigation pill - matches Figma: 1px 1px 4px 0 rgba(0, 0, 0, 0.1) */
+  .shadow-nav {
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  /* Subtle backdrop blur for the header area */
   header {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);

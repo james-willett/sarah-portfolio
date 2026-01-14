@@ -66,17 +66,19 @@ const fullTitle = title.includes('Sarah') ? title : `${title} | Sarah`;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, siteUrl)} />
 
-    <!-- Dark Mode Prevention Script -->
+    <!-- Theme Preference Script -->
     <!-- This runs immediately before page paint to prevent flash of wrong theme -->
+    <!-- Sarah's design is light-themed by default, only apply dark if explicitly saved -->
     <script is:inline>
       // Immediately check and apply theme before page renders
       (function() {
-        // Check localStorage first, then system preference
+        // Only apply dark mode if user has explicitly chosen it
+        // Sarah's design is light-themed, so we default to light mode
         const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Apply dark class if user preference or system preference indicates dark mode
-        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        // Only apply dark class if user explicitly saved 'dark' preference
+        // Do NOT auto-apply based on system preference - light is the design default
+        if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         }
       })();

@@ -14,7 +14,9 @@ export type Theme = 'light' | 'dark';
 const STORAGE_KEY = 'theme';
 
 /**
- * Get the current theme from localStorage or system preference
+ * Get the current theme from localStorage
+ * Sarah's design is light-themed by default, so we default to light
+ * unless the user has explicitly chosen dark mode
  */
 export function getTheme(): Theme {
   // Check if we're in a browser environment
@@ -22,15 +24,15 @@ export function getTheme(): Theme {
     return 'light';
   }
 
-  // Check localStorage first
+  // Check localStorage for explicit user preference
   const savedTheme = localStorage.getItem(STORAGE_KEY) as Theme | null;
   if (savedTheme === 'light' || savedTheme === 'dark') {
     return savedTheme;
   }
 
-  // Fall back to system preference
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  return prefersDark ? 'dark' : 'light';
+  // Default to light mode (Sarah's design is light-themed)
+  // Do NOT follow system preference automatically
+  return 'light';
 }
 
 /**
@@ -69,17 +71,15 @@ export function initTheme(): void {
 
 /**
  * Listen for system theme preference changes
- * Updates theme automatically if user hasn't set a manual preference
+ * NOTE: Since Sarah's design defaults to light mode, we no longer
+ * automatically follow system preference changes. The user must
+ * explicitly toggle the theme using the ThemeToggle button.
+ *
+ * This function is kept for potential future use but currently
+ * does not auto-update the theme.
  */
 export function watchSystemTheme(): void {
-  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-  mediaQuery.addEventListener('change', (e) => {
-    // Only auto-update if user hasn't manually set a preference
-    const savedTheme = localStorage.getItem(STORAGE_KEY);
-    if (!savedTheme) {
-      const newTheme = e.matches ? 'dark' : 'light';
-      setTheme(newTheme);
-    }
-  });
+  // System preference watching is disabled by default
+  // Sarah's design is light-themed and we want to respect that
+  // Users can still toggle to dark mode manually if desired
 }

@@ -8,6 +8,7 @@ export const siteConfig = {
   nav: [
     { label: 'Home', href: '/' },
     { label: 'Design', href: '/design' },
+    { label: 'Thinking', href: '/thinking' },
     { label: 'Contact', href: '/contact' },
   ],
   featuredProjects: ['higloss-energy', 'ibm', 'shipped-products'],

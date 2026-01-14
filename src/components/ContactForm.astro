@@ -1,28 +1,42 @@
 ---
 /**
- * ContactForm - Contact form with Netlify integration
+ * ContactForm - Contact form with Netlify Forms integration
  *
- * A fully functional contact form with client-side validation and Netlify Forms integration.
- * Includes success/error message handling and accessible form fields.
+ * A fully functional, accessible contact form with client-side validation and
+ * Netlify Forms integration for spam protection. Designed to match Sarah's clean,
+ * minimal aesthetic with clear visual feedback for all states.
  *
- * Features:
- * - Netlify Forms integration (automatic spam filtering)
- * - Client-side validation for required fields and email format
- * - Accessible labels and error messages
- * - Loading state during submission
- * - Success/error message display
- * - Dark mode support
- * - Uses Button component for submit action
+ * @description This component provides a complete contact form solution with:
+ * - Three required fields: name, email, and message
+ * - Client-side validation with real-time feedback on blur
+ * - Honeypot field for additional spam protection
+ * - Loading state with spinner during submission
+ * - Success/error message display after submission
+ * - Form reset after successful submission
+ * - Full dark mode support
+ * - Accessible labels, ARIA attributes, and focus management
  *
- * Design Notes:
- * - Clean, minimal form design matching site aesthetic
- * - Clear error states with red borders and messages
- * - Success state with green message
- * - Proper focus indicators for accessibility
- * - All fields required with validation
+ * @example
+ * ```astro
+ * ---
+ * import ContactForm from '@/components/ContactForm.astro';
+ * ---
+ *
+ * <section class="py-16">
+ *   <h2>Get in Touch</h2>
+ *   <ContactForm />
+ * </section>
+ * ```
+ *
+ * @component ContactForm
+ *
+ * @note This form uses Netlify Forms for backend processing. The form will work
+ * automatically when deployed to Netlify. For local development, form submissions
+ * will succeed but won't actually send anywhere.
+ *
+ * @note The form uses the Button component for the submit action with loading state
+ * managed via JavaScript for the spinner animation.
  */
-
-import Button from './Button.astro';
 ---
 
 <div class="w-full max-w-2xl">
@@ -132,19 +146,28 @@ import Button from './Button.astro';
       </p>
     </div>
 
-    <!-- Submit Button -->
+    <!--
+      Submit Button
+      Note: Using inline button styling that matches the Button component's primary variant
+      rather than the Button component itself. This allows JavaScript to manipulate the
+      button text and spinner directly during form submission. The styling is kept in sync
+      with Button.astro's primary + lg variant classes.
+    -->
     <div>
       <button
         type="submit"
         id="submit-button"
         class="w-full inline-flex items-center justify-center px-6 py-3 text-base rounded-full font-medium bg-accent dark:bg-accent-dark text-background dark:text-background-dark hover:opacity-90 active:scale-95 shadow-sm hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-dark focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-busy="false"
       >
         <span id="button-text">Send Message</span>
+        <!-- Loading spinner (same as Button component) -->
         <svg
           id="button-spinner"
           class="hidden w-5 h-5 ml-2 animate-spin"
           fill="none"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <circle
             class="opacity-25"
@@ -257,6 +280,7 @@ import Button from './Button.astro';
 
       // Show loading state
       submitButton.disabled = true;
+      submitButton.setAttribute('aria-busy', 'true');
       buttonText.textContent = 'Sending...';
       buttonSpinner.classList.remove('hidden');
 
@@ -287,6 +311,7 @@ import Button from './Button.astro';
       } finally {
         // Reset button state
         submitButton.disabled = false;
+        submitButton.setAttribute('aria-busy', 'false');
         buttonText.textContent = 'Send Message';
         buttonSpinner.classList.add('hidden');
       }

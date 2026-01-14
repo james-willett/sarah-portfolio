@@ -2,10 +2,10 @@
 SARAH'S PORTFOLIO - IMPLEMENTATION PROGRESS
 =================================================================
 Project Start Date: 2026-01-13
-Last Updated: 2026-01-14 11:33
+Last Updated: 2026-01-14
 
 =================================================================
-CURRENT STATUS: PHASE 4 COMPLETE (REUSABLE UI COMPONENTS)
+CURRENT STATUS: FIGMA DESIGN IMPLEMENTATION - HOMEPAGE STYLED
 =================================================================
 
 -------------------------------------------------------------------
@@ -140,9 +140,9 @@ ADDITIONAL WORK COMPLETED:
 [✓] Build verification - no TypeScript or build errors ✓
 
 -------------------------------------------------------------------
-PHASE 4: REUSABLE UI COMPONENTS [NOT STARTED]
+PHASE 4: REUSABLE UI COMPONENTS [COMPLETE]
 -------------------------------------------------------------------
-[ ] Step 17: Create ProjectCard component (src/components/ProjectCard.astro)
+[✓] Step 17: Create ProjectCard component (src/components/ProjectCard.astro)
     - Display project image, title, description, tags ✓
     - Link to project detail page ✓
     - Hover effects (lift, shadow, image scale) ✓
@@ -151,9 +151,13 @@ PHASE 4: REUSABLE UI COMPONENTS [NOT STARTED]
     - Tags displayed as pill-shaped badges ✓
     - Visual arrow indicator on hover ✓
     - Dark mode styles ✓
+    - Optional image support (shows placeholder when no image) ✓
+    - Full description display (no truncation per spec) ✓
+    - prefers-reduced-motion support ✓
+    - Comprehensive JSDoc documentation ✓
     - Verify: Component created and renders correctly ✓
 
-[ ] Step 18: Create Button component (src/components/Button.astro)
+[✓] Step 18: Create Button component (src/components/Button.astro)
     - Reusable button with variants (primary, secondary, outline, ghost) ✓
     - Multiple sizes (sm, md, lg) ✓
     - Can render as button or link (href prop) ✓
@@ -163,9 +167,11 @@ PHASE 4: REUSABLE UI COMPONENTS [NOT STARTED]
     - Dark mode support for all variants ✓
     - Accessibility (focus rings, aria attributes) ✓
     - Respects prefers-reduced-motion ✓
+    - Icon slots (icon-left, icon-right) for optional icons ✓
+    - Comprehensive JSDoc documentation ✓
     - Verify: Renders with different variants ✓
 
-[ ] Step 19: Create Card component (src/components/Card.astro)
+[✓] Step 19: Create Card component (src/components/Card.astro)
     - Reusable card wrapper with slot for content ✓
     - Padding variants (none, sm, md, lg, xl) ✓
     - Border toggle (on/off) ✓
@@ -175,9 +181,11 @@ PHASE 4: REUSABLE UI COMPONENTS [NOT STARTED]
     - Additional className support ✓
     - Dark mode support ✓
     - Clean, minimal design matching reference images ✓
+    - prefers-reduced-motion support ✓
+    - Comprehensive JSDoc documentation ✓
     - Verify: Works as wrapper for content ✓
 
-[ ] Step 20: Create ContactForm component (src/components/ContactForm.astro)
+[✓] Step 20: Create ContactForm component (src/components/ContactForm.astro)
     - Netlify form integration (data-netlify="true") ✓
     - Fields: name, email, message (all required) ✓
     - Honeypot field for spam protection ✓
@@ -187,28 +195,75 @@ PHASE 4: REUSABLE UI COMPONENTS [NOT STARTED]
     - Success message display ✓
     - Error message display ✓
     - Loading state with spinner on submit button ✓
-    - Accessible labels and ARIA attributes ✓
+    - Accessible labels and ARIA attributes (aria-busy, aria-required) ✓
     - Dark mode styles ✓
     - Smooth scrolling to messages/errors ✓
     - Form reset after successful submission ✓
+    - Button styling matches Button component ✓
+    - Comprehensive JSDoc documentation ✓
     - Verify: Form renders correctly, validation works ✓
 
 ADDITIONAL WORK COMPLETED:
-[ ] Build verification - no TypeScript or build errors ✓
-[ ] All components follow Sarah's design aesthetic from reference images ✓
-[ ] All components have JSDoc documentation ✓
-[ ] All components support dark mode ✓
-[ ] All components are accessible (keyboard nav, focus indicators, ARIA) ✓
+[✓] Build verification - no TypeScript or build errors ✓
+[✓] All components follow Sarah's design aesthetic from reference images ✓
+[✓] All components have JSDoc documentation ✓
+[✓] All components support dark mode ✓
+[✓] All components are accessible (keyboard nav, focus indicators, ARIA) ✓
+[✓] All components respect prefers-reduced-motion ✓
 
 -------------------------------------------------------------------
-PHASE 5: STATIC PAGES [NOT STARTED]
+PHASE 4.5: FIGMA DESIGN IMPLEMENTATION [COMPLETE]
 -------------------------------------------------------------------
-[ ] Step 21: Create Home page (src/pages/index.astro)
-    - Hero section with intro
-    - About text
-    - Featured projects grid
+[✓] Implemented Sarah's actual Figma design specs
+    - Updated global.css with exact colors from Figma
+    - Added gradient background (188deg, 5 color stops)
+    - Added Space Grotesk as placeholder for PP Radio Grotesk
+    - Added TODO comment about replacing with PP Radio Grotesk
+    - Updated text color to #3F3F3F throughout
+
+[✓] Updated Header to match Figma pill navigation
+    - Centered floating pill design
+    - border-radius: 100px
+    - box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1)
+    - White background with dark active state
+    - Added "Thinking" nav item per Figma
+    - Responsive mobile menu preserved
+
+[✓] Rebuilt homepage with actual Figma layout
+    - Split layout: intro text left, bento grid right
+    - "Hi I'm Sarah" heading with 64px/400 weight
+    - Description paragraphs
+    - "Contact me" outline button
+    - Bento-box grid with 4 project cards:
+      * HiGloss (watercolor gradient)
+      * IBM (circular badge)
+      * Star badge (yellow/gold)
+      * Shipped Products (maroon square)
+
+[✓] Set light mode as default
+    - Updated BaseLayout theme script
+    - Updated theme.ts to not follow system preference
+    - Sarah's design is light-themed by default
+    - Users can still toggle to dark mode manually
+
+Files Modified:
+- src/styles/global.css
+- src/components/Header.astro
+- src/pages/index.astro
+- src/layouts/BaseLayout.astro
+- src/scripts/theme.ts
+- astro.config.mjs (added Thinking nav item)
+
+-------------------------------------------------------------------
+PHASE 5: STATIC PAGES [PARTIAL - HOMEPAGE DONE]
+-------------------------------------------------------------------
+[✓] Step 21: Create Home page (src/pages/index.astro)
+    - Hero section with "Hi I'm Sarah" intro
+    - Description paragraphs
+    - Contact me button
+    - Bento-box project grid
     - Use BaseLayout
-    - Verify: Renders with test content
+    - Verify: Matches Figma design
 
 [ ] Step 22: Create Design/Work page (src/pages/design.astro)
     - Fetch all projects from content collection
@@ -491,16 +546,26 @@ NOTES & DECISIONS
 - Mobile-first responsive design approach
 - Target: < 50KB JS bundle, 95+ Lighthouse scores
 
+FIGMA DESIGN IMPLEMENTATION NOTES:
+- Placeholder font: Space Grotesk (Google Fonts) - replace with PP Radio Grotesk later
+- Gradient background: 188deg with 5 color stops (#F3F3F3, #F4F4F9, #FCF8F8, #FDFAF6, #F8F8F8)
+- Text color: #3F3F3F (dark gray, not black)
+- Light mode is default (Sarah's design is light-themed)
+- Nav pill: white background, rounded-full, subtle shadow
+- Bento grid uses CSS Grid with placeholder graphics (replace with actual images later)
+
 =================================================================
 NEXT STEPS
 =================================================================
-1. Start PHASE 5: Build static pages (Steps 21-23)
-   - Home page with hero and featured projects
+1. Complete PHASE 5: Remaining static pages (Steps 22-23)
    - Design/work page with full project grid
+   - Thinking page (new - matches Figma nav)
    - Contact page with ContactForm
 2. Start PHASE 6: Build dynamic routes (Step 24)
    - Dynamic project detail pages ([slug].astro)
-3. Continue with remaining phases as outlined in TECHNICAL_PLAN.MD
+3. Replace placeholder bento images with actual project images
+4. Purchase and integrate PP Radio Grotesk font
+5. Continue with remaining phases as outlined in TECHNICAL_PLAN.MD
 
 =================================================================
 END OF PROGRESS FILE

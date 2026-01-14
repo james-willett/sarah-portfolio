@@ -1,35 +1,63 @@
 ---
 /**
- * Card - Generic container component
+ * Card - Generic container component for content sections
  *
- * A versatile card component that provides consistent styling for content containers.
- * Used throughout the site for various content blocks (about sections, testimonials, etc.).
+ * A versatile, minimal card component that provides consistent styling for various
+ * content containers throughout Sarah's portfolio. Designed to match the clean,
+ * professional aesthetic from the reference images with subtle borders and shadows.
  *
- * Props:
- * - padding: Padding size (none, sm, md, lg)
- * - border: Whether to show border (true/false)
- * - shadow: Shadow size (none, sm, md, lg)
- * - className: Additional CSS classes to apply
- * - rounded: Border radius size (sm, md, lg, xl)
- * - hover: Enable hover effect (slight lift and shadow increase)
+ * @description The Card component wraps content in a styled container with configurable
+ * padding, borders, shadows, and rounded corners. It supports dark mode and can optionally
+ * include hover effects for interactive cards. Content is passed via the default slot.
  *
- * Design Notes:
- * - Clean, minimal card design matching reference images
- * - Subtle borders and shadows
- * - Light background in light mode, dark background in dark mode
- * - Flexible styling through props
- * - Content is passed via slot for maximum flexibility
+ * @example
+ * ```astro
+ * <!-- Basic card with default styling -->
+ * <Card>
+ *   <h3>About Me</h3>
+ *   <p>I'm a UX designer...</p>
+ * </Card>
+ *
+ * <!-- Card with custom styling -->
+ * <Card padding="lg" shadow="md" hover={true}>
+ *   <p>Interactive content here</p>
+ * </Card>
+ *
+ * <!-- Minimal card without border -->
+ * <Card border={false} shadow="none">
+ *   <p>Subtle content</p>
+ * </Card>
+ * ```
+ *
+ * @component Card
+ * @prop {'none'|'sm'|'md'|'lg'|'xl'} [padding='md'] - Internal padding size
+ * @prop {boolean} [border=true] - Whether to show a border
+ * @prop {'none'|'sm'|'md'|'lg'} [shadow='sm'] - Shadow depth
+ * @prop {'sm'|'md'|'lg'|'xl'} [rounded='xl'] - Border radius size
+ * @prop {boolean} [hover=false] - Enable lift effect on hover
+ * @prop {string} [className] - Additional CSS classes
+ * @slot default - Card content
  */
 
+/**
+ * Props interface for the Card component
+ */
 interface Props {
+  /** Internal padding size */
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  /** Whether to show a border */
   border?: boolean;
+  /** Shadow depth */
   shadow?: 'none' | 'sm' | 'md' | 'lg';
+  /** Additional CSS classes to apply */
   className?: string;
+  /** Border radius size */
   rounded?: 'sm' | 'md' | 'lg' | 'xl';
+  /** Enable hover effect (lift and shadow increase) */
   hover?: boolean;
 }
 
+// Destructure props with defaults
 const {
   padding = 'md',
   border = true,
@@ -85,3 +113,15 @@ const allClasses = `
 <div class={allClasses}>
   <slot />
 </div>
+
+<style>
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    div {
+      transition: none;
+    }
+    div:hover {
+      transform: none;
+    }
+  }
+</style>

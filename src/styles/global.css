@@ -1,26 +1,61 @@
 /* Import Tailwind CSS */
 @import 'tailwindcss';
 
-/* Import Inter font from Google Fonts */
+/*
+ * ============================================================================
+ * FONT SETUP
+ * ============================================================================
+ *
+ * IMPORTANT: The design spec calls for "PP Radio Grotesk" as the primary font.
+ * This is a premium font that needs to be purchased and added to the project.
+ *
+ * Current placeholder: Space Grotesk (similar geometric sans-serif from Google Fonts)
+ *
+ * TODO: Replace Space Grotesk with PP Radio Grotesk once available:
+ * 1. Purchase PP Radio Grotesk from Pangram Pangram
+ * 2. Add font files to src/fonts/ or public/fonts/
+ * 3. Update @font-face below to use PP Radio Grotesk
+ * 4. Change --font-family-heading to use "PP Radio Grotesk"
+ * ============================================================================
+ */
+
+/* Import Space Grotesk as placeholder for PP Radio Grotesk */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+/* Import Inter for body text */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* Define custom theme using Tailwind v4 @theme directive */
 @theme {
-  /* Custom semantic colors for light mode */
-  --color-background: #FFFFFF;
-  --color-foreground: #1A1A1A;
-  --color-muted: #6B7280;
-  --color-border: #E5E7EB;
-  --color-accent: #000000;
+  /*
+   * Sarah's Color Palette (from Figma)
+   * ============================================================================
+   */
 
-  /* Dark mode variants */
-  --color-background-dark: #0A0A0A;
-  --color-foreground-dark: #FFFFFF;
+  /* Primary text color - dark gray for readability */
+  --color-text-primary: #3F3F3F;
+
+  /* Light mode colors */
+  --color-background: #F8F8F8;
+  --color-foreground: #3F3F3F;
+  --color-muted: #6B6B6B;
+  --color-border: #E5E5E5;
+  --color-accent: #3F3F3F;
+
+  /* Card/nav backgrounds */
+  --color-surface: #FFFFFF;
+
+  /* Dark mode variants - adjusted for Sarah's aesthetic */
+  --color-background-dark: #1A1A1A;
+  --color-foreground-dark: #F5F5F5;
   --color-muted-dark: #9CA3AF;
   --color-border-dark: #374151;
-  --color-accent-dark: #FFFFFF;
+  --color-accent-dark: #F5F5F5;
+  --color-surface-dark: #2A2A2A;
 
-  /* Font family */
+  /* Font families */
+  /* TODO: Replace Space Grotesk with PP Radio Grotesk when available */
+  --font-family-heading: "Space Grotesk", system-ui, sans-serif;
   --font-family-sans: "Inter", system-ui, sans-serif;
 
   /* Custom spacing */
@@ -32,30 +67,106 @@
   --width-content: 72rem;
 }
 
-/* Base styles - applies to entire document */
+/*
+ * Sarah's gradient background (from Figma specs)
+ * Linear gradient at 188 degrees with soft, warm tones
+ */
 body {
-  font-family: var(--font-family-sans);
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  font-family: "Inter", system-ui, sans-serif;
+  color: #3F3F3F;
+  /*
+   * Gradient background from Figma:
+   * Direction: 188 degrees
+   * Colors: #F3F3F3 -> #F4F4F9 -> #FCF8F8 -> #FDFAF6 -> #F8F8F8
+   */
+  background: linear-gradient(
+    188deg,
+    #F3F3F3 0%,
+    #F4F4F9 25%,
+    #FCF8F8 50%,
+    #FDFAF6 75%,
+    #F8F8F8 100%
+  );
+  /* Ensure gradient covers full viewport height */
+  min-height: 100vh;
+  background-attachment: fixed;
 }
 
-/* Dark mode styles */
+/* Dark mode styles - use solid dark background instead of gradient */
+.dark body,
 :root.dark body {
-  background-color: var(--color-background-dark);
-  color: var(--color-foreground-dark);
+  background: #1A1A1A;
+  color: #F5F5F5;
 }
 
-/* Smooth transitions for theme switching (when dark mode toggle is added) */
+/* Heading typography - uses Space Grotesk (placeholder for PP Radio Grotesk) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: #3F3F3F;
+}
+
+/* H1 specific styling from Figma */
+h1 {
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 120%;
+  text-transform: capitalize;
+  color: #3F3F3F !important;
+}
+
+/* Responsive H1 sizing */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 32px;
+  }
+}
+
+/* Dark mode headings */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #F5F5F5 !important;
+}
+
+/* Smooth transitions for theme switching */
 * {
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 /* Improved focus indicators for accessibility - meets WCAG standards */
 *:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #3F3F3F;
   outline-offset: 2px;
 }
 
-:root.dark *:focus-visible {
-  outline-color: var(--color-accent-dark);
+.dark *:focus-visible {
+  outline-color: #F5F5F5;
+}
+
+/* Link styling */
+a {
+  color: #3F3F3F;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+.dark a {
+  color: #F5F5F5;
+}
+
+/* Paragraph styling */
+p {
+  color: #3F3F3F;
+  line-height: 1.6;
+}
+
+.dark p {
+  color: #F5F5F5;
 }
