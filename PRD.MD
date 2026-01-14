@@ -2,11 +2,11 @@
 
 ## Overview
 
-Build a production-ready portfolio website for Sarah (UX Designer) that showcases her design work, hosts her blog/articles, and provides a way for visitors to contact her. The site must be easy for Sarah to maintain without needing to write code.
+Build a production-ready portfolio website for Sarah (UX Designer) that showcases her design work and provides a way for visitors to contact her. The site must be easy for Sarah to maintain without needing to write code.
 
 ## Problem Statement
 
-Sarah needs a professional online presence to showcase her UX design work and share her thoughts through blog posts. She needs to be able to add new projects and blog posts easily, customize the design, and have visitors contact her—all without requiring deep technical knowledge.
+Sarah needs a professional online presence to showcase her UX design work. She needs to be able to add new projects easily, customize the design, and have visitors contact her—all without requiring deep technical knowledge.
 
 ## Success Criteria
 
@@ -16,17 +16,14 @@ The project is complete when:
 
 1. **Content Management** ✅
    - Sarah can add a new portfolio project by creating a markdown file
-   - Sarah can add a new blog post by creating a markdown file
-   - Sarah can edit existing projects and posts without breaking the site
+   - Sarah can edit existing projects without breaking the site
    - TypeScript/Zod validation catches content errors before deployment
 
 2. **Core Pages Working** ✅
    - Home page with introduction and featured projects
    - Design/Work page showing portfolio grid
-   - Thinking/Blog page showing blog posts
    - Contact page with working form
    - Individual project detail pages (dynamic routes)
-   - Individual blog post pages (dynamic routes)
 
 3. **Dark Mode Implementation** ✅
    - Dark mode toggle works on all pages
@@ -88,13 +85,10 @@ The project is complete when:
 1. Add a new portfolio project so visitors can see my latest work
    - **Acceptance**: Create `.md` file in `src/content/projects/`, add frontmatter and content, push to GitHub, see project appear on `/design` page
 
-2. Add a new blog post so I can share my thoughts
-   - **Acceptance**: Create `.md` file in `src/content/blog/`, add frontmatter and content, push to GitHub, see post appear on `/thinking` page
-
-3. Change the site's color scheme so it matches my brand
+2. Change the site's color scheme so it matches my brand
    - **Acceptance**: Edit color values in `tailwind.config.mjs`, see changes apply site-wide in both light and dark modes
 
-4. Know when someone wants to contact me
+3. Know when someone wants to contact me
    - **Acceptance**: Visitor fills out contact form, I receive an email notification
 
 ### For Visitors (End Users)
@@ -104,13 +98,10 @@ The project is complete when:
 1. See Sarah's portfolio work so I can evaluate her skills
    - **Acceptance**: Navigate to `/design`, see grid of projects with images and descriptions
 
-2. Read Sarah's articles so I can learn from her insights
-   - **Acceptance**: Navigate to `/thinking`, see list of blog posts, click to read full articles
-
-3. Contact Sarah about potential work
+2. Contact Sarah about potential work
    - **Acceptance**: Navigate to `/contact`, fill out form with name/email/message, submit successfully
 
-4. View the site in dark mode so it's easier on my eyes
+3. View the site in dark mode so it's easier on my eyes
    - **Acceptance**: Click dark mode toggle, see entire site switch to dark theme, preference persists on page navigation and browser reopen
 
 ## Core Features
@@ -123,39 +114,33 @@ The project is complete when:
    - Individual project detail pages with case study content
    - Projects managed via markdown files with frontmatter
 
-2. **Blog/Thinking Section**
-   - List view showing all blog posts
-   - Blog cards with titles, dates, descriptions
-   - Individual blog post pages with full content
-   - Posts managed via markdown files with frontmatter
-
-3. **Dark Mode**
+2. **Dark Mode**
    - Toggle button in header
    - Preference persists to localStorage
    - Respects system preference on first visit
    - All components styled for both modes
    - No flash of wrong theme
 
-4. **Contact Form**
+3. **Contact Form**
    - Form with name, email, message fields
    - Client-side validation
    - Netlify Forms integration (zero backend)
    - Success message on submission
    - Email notifications to Sarah
 
-5. **Responsive Design**
+4. **Responsive Design**
    - Mobile-first approach
    - Breakpoints: 640px, 768px, 1024px, 1280px
    - Touch-friendly navigation on mobile
    - Optimized layouts for each screen size
 
-6. **Image Optimization**
+5. **Image Optimization**
    - Automatic optimization via Astro Image component
    - Lazy loading (images load as you scroll)
    - Responsive images (right size for each screen)
    - WebP conversion for better performance
 
-7. **SEO Optimization**
+6. **SEO Optimization**
    - Unique meta titles and descriptions for each page
    - Open Graph tags for social sharing
    - Semantic HTML structure
@@ -166,10 +151,7 @@ The project is complete when:
 - Project filtering/search on portfolio page
 - Newsletter signup integration
 - Instagram/Behance feed
-- Project category pages
-- Blog category/tag pages
-- Reading time estimates for blog posts
-- Related posts suggestions
+- Project category/tag pages
 
 ## Technical Specifications
 
@@ -188,12 +170,11 @@ The project is complete when:
 ```
 src/
 ├── components/       # Reusable UI components
-├── layouts/          # Page layouts (Base, Project, Blog)
-├── pages/            # Routes (index, design, thinking, contact, dynamic routes)
-├── content/          # Markdown content (projects, blog)
+├── layouts/          # Page layouts (Base, Project)
+├── pages/            # Routes (index, design, contact, dynamic routes)
+├── content/          # Markdown content (projects)
 │   ├── config.ts     # Content Collections schema
-│   ├── projects/     # Project markdown files
-│   └── blog/         # Blog post markdown files
+│   └── projects/     # Project markdown files
 ├── lib/              # Utility functions and types
 ├── scripts/          # Client-side scripts (theme toggle)
 ├── styles/           # Global styles
@@ -210,17 +191,6 @@ featuredImage: string (required, relative path)
 tags: string[] (required)
 date: date (required)
 order: number (required, for sorting)
-published: boolean (required)
-```
-
-**Blog Post Frontmatter:**
-```yaml
-title: string (required)
-description: string (required)
-date: date (required)
-tags: string[] (optional)
-featuredImage: string (optional, relative path)
-author: string (default: "Sarah")
 published: boolean (required)
 ```
 
@@ -257,7 +227,7 @@ published: boolean (required)
    - Reason: Simplicity and cost (free hosting)
 
 2. **Easy Content Management**
-   - Sarah must be able to add content by creating markdown files only
+   - Sarah must be able to add projects by creating markdown files only
    - No database, no CMS GUI in initial version
    - Reason: Sarah is comfortable with markdown and git
 
@@ -293,27 +263,23 @@ published: boolean (required)
    - No user accounts, no protected content
    - Reason: Adds complexity, not needed for portfolio
 
-2. **Comments on Blog Posts**
-   - No comment system (can add later via third-party service)
-   - Reason: Moderation overhead, not essential for v1
-
-3. **E-commerce/Payments**
+2. **E-commerce/Payments**
    - No ability to sell products or services directly
    - Reason: Not requested, adds significant complexity
 
-4. **Multi-language Support (i18n)**
+3. **Multi-language Support (i18n)**
    - English only for initial version
    - Reason: Not requested, adds complexity
 
-5. **Real-time Features**
+4. **Real-time Features**
    - No live chat, no real-time notifications
    - Reason: Static site, not required
 
-6. **Search Functionality**
+5. **Search Functionality**
    - No site-wide search (can add later)
    - Reason: With limited content, browse is sufficient
 
-7. **Admin Dashboard**
+6. **Admin Dashboard**
    - No visual CMS interface
    - Content managed via markdown files only
    - Reason: Sarah is comfortable with files/git, saves complexity
@@ -325,7 +291,6 @@ published: boolean (required)
 Before considering the project "done," verify:
 
 - [ ] Add a test project via markdown, verify it appears correctly
-- [ ] Add a test blog post via markdown, verify it appears correctly
 - [ ] Toggle dark mode on all pages, verify styling is correct
 - [ ] Test on real mobile device (iOS and Android)
 - [ ] Test on real tablet (iPad or Android tablet)

@@ -29,7 +29,6 @@
 
 Build a production-ready portfolio website for Sarah (UX Designer) that:
 - Showcases her design work with custom thumbnail artwork
-- Hosts blog posts/articles in a "Thinking" section
 - Provides contact options (form + social links)
 - Supports dark mode with polished experience
 - Is easy for Sarah to maintain via markdown/MDX files
@@ -57,12 +56,6 @@ Build a production-ready portfolio website for Sarah (UX Designer) that:
 | Tag behavior | **Dedicated tag pages** | Each tag gets its own page (e.g., /tags/ux-design) |
 | Tag handling | **Normalized slugs** | Tags normalized to slugs, displayed with proper casing from first use |
 
-### Blog Features
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Reading experience | **Reading time + progress bar** | Show estimated reading time, scroll progress indicator |
-| Publishing | **Manual only** | Posts published when Sarah sets published: true and deploys |
-| RSS feed | **No RSS** | Skip for simplicity |
 
 ### Design & UX
 | Decision | Choice | Rationale |
@@ -98,7 +91,7 @@ Build a production-ready portfolio website for Sarah (UX Designer) that:
 ### Technical
 | Decision | Choice | Rationale |
 |----------|--------|-----------|
-| Content volume | **Medium** | 15-30 projects, 50+ blog posts over time |
+| Content volume | **Medium** | 15-30 projects over time |
 | Error handling | **Friendly error overlay** | Dev mode shows user-friendly messages for frontmatter errors |
 | Sarah's git comfort | **Comfortable** | Can commit, push, create branches |
 | Documentation | **Text only** | Written README, no screenshots/videos needed |
@@ -146,11 +139,9 @@ TypeScript           - Type checking
 |-------|------|-------------|
 | `/` | Home | Hero, about text, featured projects |
 | `/design` | Portfolio | Full project grid with all work |
-| `/thinking` | Blog | All blog posts, sorted by date |
 | `/contact` | Contact | Form + social links |
 | `/projects/[slug]` | Project Detail | Individual case studies |
-| `/blog/[slug]` | Blog Post | Individual articles |
-| `/tags/[tag]` | Tag Page | Projects/posts filtered by tag |
+| `/tags/[tag]` | Tag Page | Projects filtered by tag |
 | `/404` | Not Found | Branded error page |
 
 ### Navigation Structure (Config-Driven)
@@ -161,7 +152,6 @@ export const siteConfig = {
   nav: [
     { label: 'Home', href: '/' },
     { label: 'Design', href: '/design' },
-    { label: 'Thinking', href: '/thinking' },
     { label: 'Contact', href: '/contact' },
   ],
   featuredProjects: ['higloss-energy', 'ibm', 'shipped-products'],
@@ -188,35 +178,28 @@ sarah-portfolio/
 │   │   ├── Footer.astro       # Footer with social links
 │   │   ├── ThemeToggle.astro  # Dark/light mode with morph animation
 │   │   ├── ProjectCard.astro  # Portfolio project card
-│   │   ├── BlogCard.astro     # Blog post card with reading time
 │   │   ├── ContactForm.astro  # Netlify form
 │   │   ├── Lightbox.astro     # GLightbox wrapper
 │   │   ├── ScrollReveal.astro # Framer Motion scroll animation wrapper
-│   │   ├── ReadingProgress.astro # Blog reading progress bar
 │   │   └── mdx/               # MDX components for content
 │   │       ├── Callout.astro  # Styled callout boxes
 │   │       ├── ImageGrid.astro # Responsive image grid
 │   │       └── VideoEmbed.astro # Responsive video embed
 │   ├── layouts/
 │   │   ├── BaseLayout.astro   # Base HTML + SEO + dark mode script
-│   │   ├── ProjectLayout.astro # Case study layout
-│   │   └── BlogLayout.astro   # Blog post layout + progress bar
+│   │   └── ProjectLayout.astro # Case study layout
 │   ├── pages/
 │   │   ├── index.astro        # Home page
 │   │   ├── design.astro       # Portfolio grid
-│   │   ├── thinking.astro     # Blog listing
 │   │   ├── contact.astro      # Contact page
 │   │   ├── 404.astro          # Branded 404 page
 │   │   ├── projects/
 │   │   │   └── [slug].astro   # Dynamic project pages
-│   │   ├── blog/
-│   │   │   └── [slug].astro   # Dynamic blog pages
 │   │   └── tags/
 │   │       └── [tag].astro    # Dynamic tag pages
 │   ├── content/
 │   │   ├── config.ts          # Content collections schema
-│   │   ├── projects/          # Project .mdx files
-│   │   └── blog/              # Blog .mdx files
+│   │   └── projects/          # Project .mdx files
 │   ├── lib/
 │   │   ├── utils.ts           # Utility functions
 │   │   ├── reading-time.ts    # Calculate reading time
@@ -224,8 +207,7 @@ sarah-portfolio/
 │   ├── styles/
 │   │   └── global.css         # Global styles, font imports
 │   └── assets/                # Images optimized by Astro
-│       ├── projects/
-│       └── blog/
+│       └── projects/
 ├── public/
 │   ├── favicon.svg
 │   └── robots.txt
@@ -271,20 +253,7 @@ const projects = defineCollection({
   }),
 });
 
-const blog = defineCollection({
-  type: 'content',
-  schema: ({ image }) => z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.date(),
-    published: z.boolean(),
-    tags: z.array(z.string()).optional(),
-    featuredImage: image().optional(),
-    author: z.string().default('Sarah'),
-  }),
-});
-
-export const collections = { projects, blog };
+export const collections = { projects };
 ```
 
 ### Example Project (MDX)
@@ -333,31 +302,6 @@ Our approach focused on three key principles...
 ## Outcome
 
 The redesigned app saw a 40% increase in daily active users...
-```
-
-### Example Blog Post (MDX)
-
-```mdx
----
-title: "The Art of Asking Better Questions"
-description: "How the questions we ask shape the designs we create..."
-date: 2024-06-01
-published: true
-tags: ["UX Research", "Process"]
-featuredImage: "./blog-images/asking-questions.png"
----
-
-import { Callout } from '@/components/mdx';
-
-The best designs don't come from the best answers—they come from the best questions...
-
-<Callout type="tip">
-  Before your next design review, write down three questions you want answered.
-</Callout>
-
-## Why Questions Matter
-
-In my experience working with clients...
 ```
 
 ---
@@ -510,15 +454,7 @@ export const themeToggleVariants = {
 - Images in case studies are automatically lightbox-enabled
 - Add `data-lightbox` attribute to opt-in
 
-### 4. Reading Progress Bar
-
-**Implementation:**
-- Fixed position bar at top of viewport
-- Width scales from 0% to 100% based on scroll position
-- Only appears on blog post pages
-- Smooth transition on scroll
-
-### 5. Tag System
+### 4. Tag System
 
 **Normalization:**
 ```typescript
@@ -539,10 +475,9 @@ export function displayTag(slug: string, allTags: string[]): string {
 
 **Tag Pages:**
 - Route: `/tags/[tag]`
-- Shows both projects and blog posts with that tag
-- Grouped by content type
+- Shows projects with that tag
 
-### 6. MDX Components
+### 5. MDX Components
 
 **Callout:**
 ```astro
@@ -585,7 +520,7 @@ interface Props {
 </div>
 ```
 
-### 7. Contact Form
+### 6. Contact Form
 
 **Fields:**
 - Name (required)
@@ -598,7 +533,7 @@ interface Props {
 - Success message after submission
 - No CAPTCHA (rely on Netlify spam filtering)
 
-### 8. 404 Page
+### 7. 404 Page
 
 **Design:**
 - Branded with Sarah's personality
@@ -758,19 +693,16 @@ Add scroll reveal animations
 - [ ] Build Footer with social links
 - [ ] Implement ThemeToggle with morph animation
 - [ ] Create ProjectCard component
-- [ ] Create BlogCard with reading time
 - [ ] Build ContactForm with Netlify integration
 
 ### Phase 3: Pages (Days 7-9)
 - [ ] Build Home page with featured projects
 - [ ] Build Design (portfolio) page with grid
-- [ ] Build Thinking (blog) page with list
 - [ ] Build Contact page with form + socials
 - [ ] Create branded 404 page
 
 ### Phase 4: Dynamic Routes (Days 10-11)
 - [ ] Build project detail pages with ProjectLayout
-- [ ] Build blog post pages with BlogLayout + progress bar
 - [ ] Build tag pages with filtering
 - [ ] Implement proper SEO meta tags
 
@@ -783,7 +715,7 @@ Add scroll reveal animations
 - [ ] Performance optimization
 
 ### Phase 6: Launch (Days 15-17)
-- [ ] Create sample content (3 projects, 1 blog post)
+- [ ] Create sample content (3 projects)
 - [ ] Final testing (all browsers, devices)
 - [ ] Lighthouse audits and fixes
 - [ ] Deploy to Netlify
@@ -798,7 +730,6 @@ Add scroll reveal animations
 
 **Content:**
 - [ ] Add test project via MDX, verify it appears
-- [ ] Add test blog post via MDX, verify it appears
 - [ ] Test draft handling (published: false hidden in production)
 - [ ] Test tag pages populate correctly
 - [ ] Verify MDX components render properly
@@ -858,10 +789,10 @@ Add scroll reveal animations
 
 The project is **COMPLETE** when:
 
-1. **All pages functional** - Home, Design, Thinking, Contact, Project detail, Blog detail, Tag pages, 404
+1. **All pages functional** - Home, Design, Contact, Project detail, Tag pages, 404
 2. **Dark mode polished** - Toggle works, persists, no flash, both themes look great
 3. **Animations smooth** - Scroll reveals, theme toggle morph, staggered timing
-4. **Content workflow proven** - Sarah can add project/post via MDX, edit config, deploy
+4. **Content workflow proven** - Sarah can add project via MDX, edit config, deploy
 5. **Performance targets met** - Lighthouse 95+, bundle < 50KB
 6. **Accessibility compliant** - Keyboard nav, screen reader, color contrast
 7. **Responsive design** - Works on mobile, tablet, desktop
@@ -871,7 +802,6 @@ The project is **COMPLETE** when:
 ### Sarah Can Independently:
 
 - Add a new portfolio project (create .mdx file, push to GitHub)
-- Add a new blog post (create .mdx file, push to GitHub)
 - Add a new navigation item (edit astro.config.mjs)
 - Change featured projects (edit astro.config.mjs)
 - Update colors/fonts (edit tailwind.config.mjs)

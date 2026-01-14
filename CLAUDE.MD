@@ -2,7 +2,7 @@
 
 ## Quick Context
 
-Building a portfolio website for Sarah (UX Designer) using Astro, TypeScript, and Tailwind CSS.
+Building a portfolio website for Sarah (UX Designer) using Astro, TypeScript, and Tailwind CSS. Portfolio only - no blog.
 
 **Deadline:** 2-3 weeks (hard)
 
@@ -24,7 +24,7 @@ Building a portfolio website for Sarah (UX Designer) using Astro, TypeScript, an
 ## Important Conventions
 
 1. **Update progress.txt** - Mark steps `[✓]` as you complete them
-2. **Content uses MDX** - Projects and blog posts are `.mdx` files in `src/content/`
+2. **Content uses MDX** - Projects are `.mdx` files in `src/content/`
 3. **Config-driven** - Navigation, featured projects, and socials live in `astro.config.mjs`
 4. **Dark mode required** - All components need `dark:` variants
 5. **Drafts dev-only** - `published: false` content shows in dev, hidden in production
@@ -34,10 +34,10 @@ Building a portfolio website for Sarah (UX Designer) using Astro, TypeScript, an
 ```
 src/
 ├── components/     # Reusable UI (Header, Footer, Cards, etc.)
-├── layouts/        # Page layouts (Base, Project, Blog)
+├── layouts/        # Page layouts (Base, Project)
 ├── pages/          # Routes
-├── content/        # MDX content (projects/, blog/)
-├── lib/            # Utilities (tags.ts, reading-time.ts)
+├── content/        # MDX content (projects/)
+├── lib/            # Utilities (tags.ts)
 └── assets/         # Images (optimized by Astro)
 ```
 
