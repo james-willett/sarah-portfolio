@@ -30,9 +30,7 @@ export default defineConfig({
   },
   integrations: [mdx()],
   image: {
-    // Enable image optimization with Sharp service
-    service: {
-      entrypoint: 'astro/assets/services/sharp',
-    },
+    // Use Sharp for image optimization
+    service: { entrypoint: 'astro/assets/services/sharp' },
   },
 });
