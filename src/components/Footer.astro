@@ -6,7 +6,6 @@
  * - Social links (LinkedIn, Dribbble, Email)
  * - Copyright text with current year
  * - Minimal, clean design
- * - Dark mode support
  */
 
 import { siteConfig } from '../../astro.config.mjs';
@@ -15,7 +14,7 @@ import { siteConfig } from '../../astro.config.mjs';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="mt-auto border-t border-border dark:border-border-dark bg-background dark:bg-background-dark">
+<footer class="mt-auto border-t border-border bg-background">
   <div class="max-w-content mx-auto px-6 py-8 md:py-12">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
       <!-- Social Links -->
@@ -25,7 +24,7 @@ const currentYear = new Date().getFullYear();
             href={siteConfig.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-muted dark:text-muted-dark hover:text-foreground dark:hover:text-foreground-dark transition-colors"
+            class="text-muted hover:text-foreground transition-colors"
             aria-label="LinkedIn"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +38,7 @@ const currentYear = new Date().getFullYear();
             href={siteConfig.social.dribbble}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-muted dark:text-muted-dark hover:text-foreground dark:hover:text-foreground-dark transition-colors"
+            class="text-muted hover:text-foreground transition-colors"
             aria-label="Dribbble"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +50,7 @@ const currentYear = new Date().getFullYear();
         {siteConfig.social.email && (
           <a
             href={`mailto:${siteConfig.social.email}`}
-            class="text-muted dark:text-muted-dark hover:text-foreground dark:hover:text-foreground-dark transition-colors"
+            class="text-muted hover:text-foreground transition-colors"
             aria-label="Email"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +61,7 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- Copyright -->
-      <div class="text-sm text-muted dark:text-muted-dark">
+      <div class="text-sm text-muted">
         &copy; {currentYear} Sarah. All rights reserved.
       </div>
     </div>

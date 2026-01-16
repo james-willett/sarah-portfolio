@@ -5,13 +5,15 @@
  * Provides:
  * - HTML document structure
  * - SEO meta tags (title, description, OG tags)
- * - Dark mode detection script (prevents flash of wrong theme)
  * - Global styles
  * - Consistent header and footer
  */
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+// Import global styles (must be in frontmatter for @font-face to work)
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -66,24 +68,6 @@ const fullTitle = title.includes('Sarah') ? title : `${title} | Sarah`;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, siteUrl)} />
 
-    <!-- Theme Preference Script -->
-    <!-- This runs immediately before page paint to prevent flash of wrong theme -->
-    <!-- Sarah's design is light-themed by default, only apply dark if explicitly saved -->
-    <script is:inline>
-      // Immediately check and apply theme before page renders
-      (function() {
-        // Only apply dark mode if user has explicitly chosen it
-        // Sarah's design is light-themed, so we default to light mode
-        const savedTheme = localStorage.getItem('theme');
-
-        // Only apply dark class if user explicitly saved 'dark' preference
-        // Do NOT auto-apply based on system preference - light is the design default
-        if (savedTheme === 'dark') {
-          document.documentElement.classList.add('dark');
-        }
-      })();
-    </script>
-
     <!-- Google Analytics (optional - will be added later if needed) -->
     <!-- {import.meta.env.PUBLIC_GA_TRACKING_ID && (
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_TRACKING_ID}`}></script>
@@ -107,7 +91,3 @@ const fullTitle = title.includes('Sarah') ? title : `${title} | Sarah`;
   </body>
 </html>
 
-<style>
-  /* Import global styles */
-  @import '../styles/global.css';
-</style>

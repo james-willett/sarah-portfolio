@@ -76,7 +76,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
     tags && tags.length > 0 && (
       <div class="flex flex-wrap gap-2 mb-8">
         {tags.map((tag) => (
-          <span class="px-3 py-1 text-sm rounded-full bg-zinc-100 text-foreground dark:bg-zinc-800 dark:text-foreground-dark">
+          <span class="px-3 py-1 text-sm rounded-full bg-zinc-100 text-foreground">
             {tag}
           </span>
         ))}
@@ -85,7 +85,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
   }
 
   {/* Project Date */}
-  <p class="text-sm text-muted dark:text-muted-dark mb-8">
+  <p class="text-sm text-muted mb-8">
     Published: {formattedDate}
   </p>
 
@@ -93,10 +93,10 @@ const formattedDate = date.toLocaleDateString('en-US', {
   <Content />
 
   {/* Back to Design Link at bottom of content */}
-  <div class="mt-16 pt-8 border-t border-border dark:border-border-dark">
+  <div class="mt-16 pt-8 border-t border-border">
     <a
       href="/design"
-      class="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground dark:text-muted-dark dark:hover:text-foreground-dark transition-colors"
+      class="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"
     >
       <svg
         width="20"
@@ -133,9 +133,5 @@ const formattedDate = date.toLocaleDateString('en-US', {
   /* Tag pill hover effect */
   .flex-wrap span:hover {
     background-color: #e4e4e7;
-  }
-
-  .dark .flex-wrap span:hover {
-    background-color: #3f3f46;
   }
 </style>

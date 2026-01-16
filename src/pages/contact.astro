@@ -25,15 +25,15 @@ import { siteConfig } from '../../astro.config.mjs';
         <div class="mb-12 text-center">
           <!-- Page Title - matching homepage heading style -->
           <h1
-            style="color: #3F3F3F; font-size: 48px; font-weight: 400; font-family: 'Space Grotesk', sans-serif;"
-            class="mb-6 dark:text-foreground-dark"
+            style="color: #3F3F3F; font-size: 48px; font-weight: 900; font-family: 'PP Radio Grotesk', sans-serif;"
+            class="mb-6"
           >
             Let's Connect
           </h1>
           <!-- Intro Text -->
           <p
             style="color: #3F3F3F; font-size: 18px; line-height: 1.6;"
-            class="max-w-2xl mx-auto dark:text-muted-dark"
+            class="max-w-2xl mx-auto"
           >
             I'm always interested in hearing about new projects, design challenges, or opportunities to collaborate.
           </p>
@@ -50,11 +50,11 @@ import { siteConfig } from '../../astro.config.mjs';
           <div class="space-y-8">
             <!-- Contact Info Card -->
             <div
-              class="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-border dark:border-border-dark"
+              class="p-6 rounded-xl bg-zinc-50 border border-border"
             >
               <h2
-                class="text-lg font-semibold text-foreground dark:text-foreground-dark mb-4"
-                style="font-family: 'Space Grotesk', sans-serif;"
+                class="text-lg font-semibold text-foreground mb-4"
+                style="font-family: 'PP Radio Grotesk', sans-serif;"
               >
                 Other Ways to Reach Me
               </h2>
@@ -65,9 +65,9 @@ import { siteConfig } from '../../astro.config.mjs';
                   siteConfig.social.email && (
                     <a
                       href={`mailto:${siteConfig.social.email}`}
-                      class="flex items-center gap-3 text-muted dark:text-muted-dark hover:text-accent dark:hover:text-accent-dark transition-colors group"
+                      class="flex items-center gap-3 text-muted hover:text-accent transition-colors group"
                     >
-                      <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 border border-border dark:border-border-dark group-hover:border-accent dark:group-hover:border-accent-dark transition-colors">
+                      <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-border group-hover:border-accent transition-colors">
                         <svg
                           width="20"
                           height="20"
@@ -85,7 +85,7 @@ import { siteConfig } from '../../astro.config.mjs';
                         </svg>
                       </div>
                       <div>
-                        <div class="text-sm font-medium text-foreground dark:text-foreground-dark">
+                        <div class="text-sm font-medium text-foreground">
                           Email
                         </div>
                         <div class="text-sm">{siteConfig.social.email}</div>
@@ -100,9 +100,9 @@ import { siteConfig } from '../../astro.config.mjs';
                       href={siteConfig.social.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="flex items-center gap-3 text-muted dark:text-muted-dark hover:text-accent dark:hover:text-accent-dark transition-colors group"
+                      class="flex items-center gap-3 text-muted hover:text-accent transition-colors group"
                     >
-                      <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 border border-border dark:border-border-dark group-hover:border-accent dark:group-hover:border-accent-dark transition-colors">
+                      <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-border group-hover:border-accent transition-colors">
                         <svg
                           width="20"
                           height="20"
@@ -114,7 +114,7 @@ import { siteConfig } from '../../astro.config.mjs';
                         </svg>
                       </div>
                       <div>
-                        <div class="text-sm font-medium text-foreground dark:text-foreground-dark">
+                        <div class="text-sm font-medium text-foreground">
                           LinkedIn
                         </div>
                         <div class="text-sm">Connect with me</div>
@@ -129,9 +129,9 @@ import { siteConfig } from '../../astro.config.mjs';
                       href={siteConfig.social.dribbble}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="flex items-center gap-3 text-muted dark:text-muted-dark hover:text-accent dark:hover:text-accent-dark transition-colors group"
+                      class="flex items-center gap-3 text-muted hover:text-accent transition-colors group"
                     >
-                      <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 border border-border dark:border-border-dark group-hover:border-accent dark:group-hover:border-accent-dark transition-colors">
+                      <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-border group-hover:border-accent transition-colors">
                         <svg
                           width="20"
                           height="20"
@@ -143,7 +143,7 @@ import { siteConfig } from '../../astro.config.mjs';
                         </svg>
                       </div>
                       <div>
-                        <div class="text-sm font-medium text-foreground dark:text-foreground-dark">
+                        <div class="text-sm font-medium text-foreground">
                           Dribbble
                         </div>
                         <div class="text-sm">View my work</div>
@@ -156,11 +156,11 @@ import { siteConfig } from '../../astro.config.mjs';
 
             <!-- Response Time Note -->
             <div
-              class="p-4 rounded-lg bg-accent/5 dark:bg-accent-dark/5 border border-accent/20 dark:border-accent-dark/20"
+              class="p-4 rounded-lg bg-accent/5 border border-accent/20"
             >
               <div class="flex items-start gap-3">
                 <svg
-                  class="w-5 h-5 text-accent dark:text-accent-dark flex-shrink-0 mt-0.5"
+                  class="w-5 h-5 text-accent flex-shrink-0 mt-0.5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -173,7 +173,7 @@ import { siteConfig } from '../../astro.config.mjs';
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <p class="text-sm text-muted dark:text-muted-dark leading-relaxed">
+                <p class="text-sm text-muted leading-relaxed">
                   I typically respond within 1-2 business days. For urgent inquiries, please reach out via email directly.
                 </p>
               </div>

@@ -93,14 +93,14 @@ const roundedClasses = {
 };
 
 // Border classes
-const borderClass = border ? 'border border-border dark:border-border-dark' : '';
+const borderClass = border ? 'border border-border' : '';
 
 // Hover effect classes
 const hoverClass = hover ? 'transition-all duration-300 hover:-translate-y-1 hover:shadow-lg' : '';
 
 // Combine all classes
 const allClasses = `
-  bg-white dark:bg-zinc-900
+  bg-white
   ${paddingClasses[padding]}
   ${shadowClasses[shadow]}
   ${roundedClasses[rounded]}

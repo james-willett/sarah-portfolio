@@ -13,7 +13,6 @@
  * - Loading state with spinner during submission
  * - Success/error message display after submission
  * - Form reset after successful submission
- * - Full dark mode support
  * - Accessible labels, ARIA attributes, and focus management
  *
  * @example
@@ -43,7 +42,7 @@
   <!-- Success Message (hidden by default) -->
   <div
     id="form-success"
-    class="hidden mb-6 p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
+    class="hidden mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800"
     role="alert"
   >
     <p class="font-medium">Message sent successfully!</p>
@@ -53,7 +52,7 @@
   <!-- Error Message (hidden by default) -->
   <div
     id="form-error"
-    class="hidden mb-6 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200"
+    class="hidden mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800"
     role="alert"
   >
     <p class="font-medium">Something went wrong</p>
@@ -84,7 +83,7 @@
     <div>
       <label
         for="name"
-        class="block text-sm font-medium text-foreground dark:text-foreground-dark mb-2"
+        class="block text-sm font-medium text-foreground mb-2"
       >
         Name <span class="text-red-500" aria-label="required">*</span>
       </label>
@@ -93,11 +92,11 @@
         id="name"
         name="name"
         required
-        class="w-full px-4 py-3 rounded-lg border border-border dark:border-border-dark bg-white dark:bg-zinc-900 text-foreground dark:text-foreground-dark placeholder-muted dark:placeholder-muted-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:border-transparent transition-colors"
+        class="w-full px-4 py-3 rounded-lg border border-border bg-white text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors"
         placeholder="Your name"
         aria-required="true"
       />
-      <p id="name-error" class="hidden mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
+      <p id="name-error" class="hidden mt-1 text-sm text-red-600" role="alert">
         Please enter your name
       </p>
     </div>
@@ -106,7 +105,7 @@
     <div>
       <label
         for="email"
-        class="block text-sm font-medium text-foreground dark:text-foreground-dark mb-2"
+        class="block text-sm font-medium text-foreground mb-2"
       >
         Email <span class="text-red-500" aria-label="required">*</span>
       </label>
@@ -115,11 +114,11 @@
         id="email"
         name="email"
         required
-        class="w-full px-4 py-3 rounded-lg border border-border dark:border-border-dark bg-white dark:bg-zinc-900 text-foreground dark:text-foreground-dark placeholder-muted dark:placeholder-muted-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:border-transparent transition-colors"
+        class="w-full px-4 py-3 rounded-lg border border-border bg-white text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors"
         placeholder="your.email@example.com"
         aria-required="true"
       />
-      <p id="email-error" class="hidden mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
+      <p id="email-error" class="hidden mt-1 text-sm text-red-600" role="alert">
         Please enter a valid email address
       </p>
     </div>
@@ -128,7 +127,7 @@
     <div>
       <label
         for="message"
-        class="block text-sm font-medium text-foreground dark:text-foreground-dark mb-2"
+        class="block text-sm font-medium text-foreground mb-2"
       >
         Message <span class="text-red-500" aria-label="required">*</span>
       </label>
@@ -137,11 +136,11 @@
         name="message"
         required
         rows="6"
-        class="w-full px-4 py-3 rounded-lg border border-border dark:border-border-dark bg-white dark:bg-zinc-900 text-foreground dark:text-foreground-dark placeholder-muted dark:placeholder-muted-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:border-transparent transition-colors resize-y"
+        class="w-full px-4 py-3 rounded-lg border border-border bg-white text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors resize-y"
         placeholder="Tell me about your project..."
         aria-required="true"
       ></textarea>
-      <p id="message-error" class="hidden mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
+      <p id="message-error" class="hidden mt-1 text-sm text-red-600" role="alert">
         Please enter a message
       </p>
     </div>
@@ -157,7 +156,7 @@
       <button
         type="submit"
         id="submit-button"
-        class="w-full inline-flex items-center justify-center px-6 py-3 text-base rounded-full font-medium bg-accent dark:bg-accent-dark text-background dark:text-background-dark hover:opacity-90 active:scale-95 shadow-sm hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-dark focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        class="w-full inline-flex items-center justify-center px-6 py-3 text-base rounded-full font-medium bg-accent text-background hover:opacity-90 active:scale-95 shadow-sm hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
         aria-busy="false"
       >
         <span id="button-text">Send Message</span>
@@ -212,13 +211,13 @@
 
   // Hide error message for a field
   function hideError(input: HTMLInputElement | HTMLTextAreaElement, error: HTMLParagraphElement) {
-    input.classList.remove('border-red-500', 'dark:border-red-400');
+    input.classList.remove('border-red-500');
     error.classList.add('hidden');
   }
 
   // Show error message for a field
   function showError(input: HTMLInputElement | HTMLTextAreaElement, error: HTMLParagraphElement) {
-    input.classList.add('border-red-500', 'dark:border-red-400');
+    input.classList.add('border-red-500');
     error.classList.remove('hidden');
   }
 

@@ -1,38 +1,55 @@
+/* Import Inter for body text (Google Fonts) - MUST be first */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /* Import Tailwind CSS */
 @import 'tailwindcss';
-
-/*
- * IMPORTANT: Tailwind v4 Dark Mode Configuration
- * By default, Tailwind v4 uses prefers-color-scheme for dark mode.
- * We want to use the .dark class strategy instead (manual toggle).
- * This @variant directive tells Tailwind to only apply dark: variants
- * when the .dark class is present on an ancestor element.
- */
-@variant dark (&:where(.dark, .dark *));
 
 /*
  * ============================================================================
  * FONT SETUP
  * ============================================================================
  *
- * IMPORTANT: The design spec calls for "PP Radio Grotesk" as the primary font.
- * This is a premium font that needs to be purchased and added to the project.
- *
- * Current placeholder: Space Grotesk (similar geometric sans-serif from Google Fonts)
- *
- * TODO: Replace Space Grotesk with PP Radio Grotesk once available:
- * 1. Purchase PP Radio Grotesk from Pangram Pangram
- * 2. Add font files to src/fonts/ or public/fonts/
- * 3. Update @font-face below to use PP Radio Grotesk
- * 4. Change --font-family-heading to use "PP Radio Grotesk"
+ * PP Radio Grotesk - Primary heading font (from Pangram Pangram)
+ * Inter - Body text font (Google Fonts)
  * ============================================================================
  */
 
-/* Import Space Grotesk as placeholder for PP Radio Grotesk */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+/* PP Radio Grotesk - Local Font Files */
+@font-face {
+  font-family: "PP Radio Grotesk";
+  src: url("/fonts/Radio Grotesk/PPRadioGrotesk-Light.woff2") format("woff2"),
+       url("/fonts/Radio Grotesk/PPRadioGrotesk-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
 
-/* Import Inter for body text */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@font-face {
+  font-family: "PP Radio Grotesk";
+  src: url("/fonts/Radio Grotesk/PPRadioGrotesk-Regular.woff2") format("woff2"),
+       url("/fonts/Radio Grotesk/PPRadioGrotesk-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Radio Grotesk";
+  src: url("/fonts/Radio Grotesk/PPRadioGrotesk-Bold.woff2") format("woff2"),
+       url("/fonts/Radio Grotesk/PPRadioGrotesk-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Radio Grotesk";
+  src: url("/fonts/Radio Grotesk/PPRadioGrotesk-Black.woff2") format("woff2"),
+       url("/fonts/Radio Grotesk/PPRadioGrotesk-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Define custom theme using Tailwind v4 @theme directive */
 @theme {
@@ -54,17 +71,8 @@
   /* Card/nav backgrounds */
   --color-surface: #FFFFFF;
 
-  /* Dark mode variants - adjusted for Sarah's aesthetic */
-  --color-background-dark: #1A1A1A;
-  --color-foreground-dark: #F5F5F5;
-  --color-muted-dark: #9CA3AF;
-  --color-border-dark: #374151;
-  --color-accent-dark: #F5F5F5;
-  --color-surface-dark: #2A2A2A;
-
   /* Font families */
-  /* TODO: Replace Space Grotesk with PP Radio Grotesk when available */
-  --font-family-heading: "Space Grotesk", system-ui, sans-serif;
+  --font-family-heading: "PP Radio Grotesk", system-ui, sans-serif;
   --font-family-sans: "Inter", system-ui, sans-serif;
 
   /* Custom spacing */
@@ -101,23 +109,16 @@ body {
   background-attachment: fixed;
 }
 
-/* Dark mode styles - use solid dark background instead of gradient */
-.dark body,
-:root.dark body {
-  background: #1A1A1A;
-  color: #F5F5F5;
-}
-
-/* Heading typography - uses Space Grotesk (placeholder for PP Radio Grotesk) */
+/* Heading typography - uses PP Radio Grotesk */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-family: "PP Radio Grotesk", system-ui, sans-serif;
   color: #3F3F3F;
 }
 
 /* H1 specific styling from Figma */
 h1 {
   font-size: 64px;
-  font-weight: 400;
+  font-weight: 900;
   line-height: 120%;
   text-transform: capitalize;
   color: #3F3F3F !important;
@@ -136,12 +137,7 @@ h1 {
   }
 }
 
-/* Dark mode headings */
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-  color: #F5F5F5 !important;
-}
-
-/* Smooth transitions for theme switching */
+/* Smooth transitions */
 * {
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
@@ -150,10 +146,6 @@ h1 {
 *:focus-visible {
   outline: 2px solid #3F3F3F;
   outline-offset: 2px;
-}
-
-.dark *:focus-visible {
-  outline-color: #F5F5F5;
 }
 
 /* Link styling */
@@ -166,16 +158,8 @@ a:hover {
   opacity: 0.8;
 }
 
-.dark a {
-  color: #F5F5F5;
-}
-
 /* Paragraph styling */
 p {
   color: #3F3F3F;
   line-height: 1.6;
-}
-
-.dark p {
-  color: #F5F5F5;
 }

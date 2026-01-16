@@ -12,7 +12,6 @@
  */
 
 import { siteConfig } from '../../astro.config.mjs';
-import ThemeToggle from './ThemeToggle.astro';
 
 // Get current path for active link highlighting
 const currentPath = Astro.url.pathname;
@@ -33,7 +32,7 @@ const currentPath = Astro.url.pathname;
       - Size: ~440px × 58px
     -->
     <div
-      class="inline-flex items-center p-2 gap-2 rounded-full bg-white dark:bg-zinc-800 shadow-nav"
+      class="inline-flex items-center p-2 gap-2 rounded-full bg-white shadow-nav"
     >
       <!-- Desktop Navigation - Using explicit colors from Figma (#3F3F3F) -->
       <div class="hidden md:flex items-center gap-2">
@@ -45,8 +44,8 @@ const currentPath = Astro.url.pathname;
               href={item.href}
               class={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                 isActive
-                  ? 'bg-[#3F3F3F] dark:bg-gray-100 text-white dark:text-gray-900'
-                  : 'text-[#3F3F3F] dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  ? 'bg-[#3F3F3F] !text-white'
+                  : 'text-[#3F3F3F] hover:bg-gray-100'
               }`}
             >
               {item.label}
@@ -59,7 +58,7 @@ const currentPath = Astro.url.pathname;
       <button
         id="mobile-menu-button"
         type="button"
-        class="md:hidden p-2 text-[#3F3F3F] dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+        class="md:hidden p-2 text-[#3F3F3F] hover:bg-gray-100 rounded-full transition-colors"
         aria-label="Toggle menu"
         aria-expanded="false"
       >
@@ -95,10 +94,6 @@ const currentPath = Astro.url.pathname;
         </svg>
       </button>
 
-      <!-- Theme Toggle (always visible) -->
-      <div class="ml-1">
-        <ThemeToggle />
-      </div>
     </div>
   </nav>
 
@@ -107,7 +102,7 @@ const currentPath = Astro.url.pathname;
     id="mobile-menu"
     class="md:hidden hidden mt-2 flex justify-center"
   >
-    <div class="inline-flex flex-col p-3 gap-2 rounded-2xl bg-white dark:bg-zinc-800 shadow-nav">
+    <div class="inline-flex flex-col p-3 gap-2 rounded-2xl bg-white shadow-nav">
       {siteConfig.nav.map((item) => {
         const isActive = currentPath === item.href ||
                         (item.href !== '/' && currentPath.startsWith(item.href));
@@ -116,8 +111,8 @@ const currentPath = Astro.url.pathname;
             href={item.href}
             class={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 text-center ${
               isActive
-                ? 'bg-[#3F3F3F] dark:bg-gray-100 text-white dark:text-gray-900'
-                : 'text-[#3F3F3F] dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
+                ? 'bg-[#3F3F3F] !text-white'
+                : 'text-[#3F3F3F] hover:bg-gray-100'
             }`}
           >
             {item.label}

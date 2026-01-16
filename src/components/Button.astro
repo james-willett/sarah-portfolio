@@ -79,7 +79,7 @@ const hasIconLeft = Astro.slots.has('icon-left');
 const hasIconRight = Astro.slots.has('icon-right');
 
 // Base classes applied to all buttons
-const baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-accent-dark focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+const baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
 // Size variants
 const sizeClasses = {
@@ -90,10 +90,10 @@ const sizeClasses = {
 
 // Style variants - Using explicit colors from Figma (#3F3F3F for text)
 const variantClasses = {
-  primary: 'bg-[#3F3F3F] dark:bg-gray-100 text-white dark:text-gray-900 hover:opacity-90 active:scale-95 shadow-sm hover:shadow-md',
-  secondary: 'bg-zinc-100 dark:bg-zinc-800 text-[#3F3F3F] dark:text-gray-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 active:scale-95',
-  outline: 'border border-[#3F3F3F] dark:border-gray-400 text-[#3F3F3F] dark:text-gray-200 hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95',
-  ghost: 'text-[#3F3F3F] dark:text-gray-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95',
+  primary: 'bg-[#3F3F3F] text-white hover:opacity-90 active:scale-95 shadow-sm hover:shadow-md',
+  secondary: 'bg-zinc-100 text-[#3F3F3F] hover:bg-zinc-200 active:scale-95',
+  outline: 'border border-[#3F3F3F] text-[#3F3F3F] hover:bg-zinc-50 active:scale-95',
+  ghost: 'text-[#3F3F3F] hover:bg-zinc-100 active:scale-95',
 };
 
 // Combine all classes
