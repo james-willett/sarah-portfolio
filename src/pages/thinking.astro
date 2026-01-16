@@ -1,0 +1,151 @@
+---
+/**
+ * Thinking Page - PLACEHOLDER FOR EXTERNAL SITE
+ *
+ * IMPORTANT: This page is a temporary placeholder only.
+ * The "Thinking" navigation item will eventually point to Sarah's external
+ * blog/thinking site (a separate project/platform).
+ *
+ * TODO: Update the nav link in astro.config.mjs to point to the external URL
+ * once Sarah's thinking site is ready.
+ *
+ * For now, this page provides a simple "Coming Soon" message for visitors
+ * who click the Thinking link before the external site is live.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Thinking"
+  description="Thoughts and insights about UX design, AI experiences, and the intersection of technology and human-centered design."
+>
+  <main class="flex-1">
+    <!-- Page Content Section -->
+    <section class="max-w-content mx-auto px-6 py-12 md:py-16">
+      <div class="max-w-3xl">
+        <!-- Page Title - matching homepage heading style -->
+        <h1
+          style="color: #3F3F3F; font-size: 48px; font-weight: 400; font-family: 'Space Grotesk', sans-serif;"
+          class="mb-8 dark:text-foreground-dark"
+        >
+          Thinking
+        </h1>
+
+        <!-- Intro Text -->
+        <div class="space-y-6 mb-12">
+          <p
+            style="color: #3F3F3F; font-size: 18px; line-height: 1.6;"
+            class="dark:text-muted-dark"
+          >
+            This is where I share my thoughts on design, technology, and the questions that drive my work.
+          </p>
+          <p
+            style="color: #3F3F3F; font-size: 16px; line-height: 1.6;"
+            class="dark:text-muted-dark"
+          >
+            I believe in questioning what technology should do, not just what it can do. My writing explores the intersection of AI, ethics, and human-centered design.
+          </p>
+        </div>
+
+        <!-- Coming Soon Message -->
+        <div
+          class="p-8 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-border dark:border-border-dark"
+        >
+          <div class="flex items-start gap-4">
+            <!-- Icon -->
+            <div class="flex-shrink-0">
+              <svg
+                class="w-6 h-6 text-accent dark:text-accent-dark"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+            </div>
+
+            <!-- Content -->
+            <div>
+              <h2
+                class="text-xl font-semibold text-foreground dark:text-foreground-dark mb-2"
+              >
+                Coming Soon
+              </h2>
+              <p class="text-muted dark:text-muted-dark leading-relaxed">
+                I'm currently working on articles and insights to share here. Check back soon for thoughts on AI design, ethical technology, and the future of human-centered experiences.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional: Topics I'll Write About -->
+        <div class="mt-12">
+          <h2
+            class="text-2xl font-semibold text-foreground dark:text-foreground-dark mb-6"
+            style="font-family: 'Space Grotesk', sans-serif;"
+          >
+            Topics I'm Exploring
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              class="p-4 rounded-lg bg-white dark:bg-zinc-900 border border-border dark:border-border-dark"
+            >
+              <h3 class="font-semibold text-foreground dark:text-foreground-dark mb-2">
+                AI & Trust
+              </h3>
+              <p class="text-sm text-muted dark:text-muted-dark">
+                How do we design AI experiences that people can trust?
+              </p>
+            </div>
+            <div
+              class="p-4 rounded-lg bg-white dark:bg-zinc-900 border border-border dark:border-border-dark"
+            >
+              <h3 class="font-semibold text-foreground dark:text-foreground-dark mb-2">
+                Critical Design
+              </h3>
+              <p class="text-sm text-muted dark:text-muted-dark">
+                Questioning technology through design practice.
+              </p>
+            </div>
+            <div
+              class="p-4 rounded-lg bg-white dark:bg-zinc-900 border border-border dark:border-border-dark"
+            >
+              <h3 class="font-semibold text-foreground dark:text-foreground-dark mb-2">
+                User Research
+              </h3>
+              <p class="text-sm text-muted dark:text-muted-dark">
+                Validating design decisions with real users.
+              </p>
+            </div>
+            <div
+              class="p-4 rounded-lg bg-white dark:bg-zinc-900 border border-border dark:border-border-dark"
+            >
+              <h3 class="font-semibold text-foreground dark:text-foreground-dark mb-2">
+                Visual Craft
+              </h3>
+              <p class="text-sm text-muted dark:text-muted-dark">
+                The intersection of aesthetics and usability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Responsive heading adjustments */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 36px !important;
+    }
+  }
+</style>

@@ -8,6 +8,9 @@ export const siteConfig = {
   nav: [
     { label: 'Home', href: '/' },
     { label: 'Design', href: '/design' },
+    // TODO: Update 'Thinking' href to point to Sarah's external blog/thinking site
+    // Current placeholder: /thinking (local page)
+    // Future: Replace with actual external URL (e.g., 'https://thinking.sarah.design')
     { label: 'Thinking', href: '/thinking' },
     { label: 'Contact', href: '/contact' },
   ],

@@ -5,26 +5,26 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Semantic colors for light/dark mode
+        // Semantic colors for light/dark mode (matching Sarah's Figma specs from global.css)
         background: {
-          DEFAULT: '#FFFFFF', // Light mode
-          dark: '#0A0A0A', // Dark mode
+          DEFAULT: '#F8F8F8', // Light mode (matches Figma gradient base)
+          dark: '#1A1A1A', // Dark mode
         },
         foreground: {
-          DEFAULT: '#1A1A1A', // Light mode text
-          dark: '#FFFFFF', // Dark mode text
+          DEFAULT: '#3F3F3F', // Light mode text (Figma spec)
+          dark: '#F5F5F5', // Dark mode text (Figma spec)
         },
         muted: {
-          DEFAULT: '#6B7280', // Light mode secondary text
-          dark: '#9CA3AF', // Dark mode secondary text
+          DEFAULT: '#6B6B6B', // Light mode secondary text (Figma spec)
+          dark: '#9CA3AF', // Dark mode secondary text (Figma spec)
         },
         border: {
-          DEFAULT: '#E5E7EB', // Light mode borders
-          dark: '#374151', // Dark mode borders
+          DEFAULT: '#E5E5E5', // Light mode borders (Figma spec)
+          dark: '#374151', // Dark mode borders (Figma spec)
         },
         accent: {
-          DEFAULT: '#000000',
-          dark: '#FFFFFF',
+          DEFAULT: '#3F3F3F', // Matches primary text color (Figma spec)
+          dark: '#F5F5F5', // Dark mode accent (Figma spec)
         },
       },
       fontFamily: {

@@ -146,10 +146,13 @@ TypeScript           - Type checking
 | ------------------ | -------------- | ----------------------------------- |
 | `/`                | Home           | Hero, about text, featured projects |
 | `/design`          | Portfolio      | Full project grid with all work     |
+| `/thinking`        | Thinking       | **Placeholder - will link to external site** |
 | `/contact`         | Contact        | Form + social links                 |
 | `/projects/[slug]` | Project Detail | Individual case studies             |
 | `/tags/[tag]`      | Tag Page       | Projects filtered by tag            |
 | `/404`             | Not Found      | Branded error page                  |
+
+**Note on Thinking Page:** The `/thinking` route is a temporary placeholder. Sarah's "Thinking" content (blog/articles) will be hosted on a separate external site. Once that site is live, update the navigation link in `astro.config.mjs` to point to the external URL instead of the local `/thinking` page.
 
 ### Navigation Structure (Config-Driven)
 
