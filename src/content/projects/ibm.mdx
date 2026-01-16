@@ -1,0 +1,286 @@
+---
+title: "IBM Design System"
+description: "Contributing to IBM's Carbon Design System, creating accessible and scalable components for enterprise applications."
+thumbnail: "./thumbnails/ibm-thumb.svg"
+tags: ["Design Systems", "Enterprise", "Accessibility"]
+date: 2024-01-20
+order: 2
+published: true
+client: "IBM"
+role: "Senior UX Designer"
+timeline: "6 months"
+liveUrl: "https://carbondesignsystem.com"
+---
+
+## Overview
+
+I had the privilege of contributing to IBM's Carbon Design System - one of the most widely-used enterprise design systems in the world. My focus was on improving accessibility across the component library and developing new patterns for AI-powered interfaces.
+
+This work impacted thousands of IBM products and helped establish best practices for enterprise AI design.
+
+---
+
+## The Challenge
+
+### Context
+
+Carbon Design System serves as the foundation for IBM's entire product portfolio - from Cloud services to Watson AI to enterprise software. With this scale comes significant responsibility:
+
+- **2,000+ products** built on Carbon
+- **50,000+ designers and developers** using the system daily
+- **Millions of end users** interacting with Carbon-based interfaces
+
+### Specific Challenges
+
+My work focused on two interconnected problems:
+
+**1. Accessibility Gaps**
+
+An audit revealed that while Carbon met WCAG 2.1 AA requirements, several components had edge cases that created friction for users with disabilities:
+
+- Data tables lacked proper screen reader announcements for sort states
+- Date pickers were difficult to navigate with keyboard alone
+- Loading states didn't communicate progress to assistive technologies
+
+**2. AI Interface Patterns**
+
+With the rise of generative AI, IBM needed new patterns for:
+
+- Conveying AI confidence levels to users
+- Designing appropriate trust indicators
+- Creating feedback mechanisms for AI outputs
+- Handling loading states for unpredictable AI response times
+
+---
+
+## Research & Discovery
+
+### Accessibility Audit
+
+I partnered with IBM's Accessibility team to conduct a comprehensive audit:
+
+- **Automated testing** with axe-core and WAVE
+- **Manual keyboard testing** across all interactive components
+- **Screen reader testing** with NVDA, JAWS, and VoiceOver
+- **User testing** with 12 participants with various disabilities
+
+### AI Pattern Research
+
+To develop AI-specific patterns, I conducted:
+
+- **Competitive analysis** of 15 AI-powered products (ChatGPT, Midjourney, Jasper, etc.)
+- **Literature review** of AI UX research and papers
+- **Expert interviews** with 6 AI researchers at IBM Research
+- **User research** with 20 enterprise users of AI tools
+
+### Key Findings
+
+**Accessibility Findings:**
+
+1. Sort indicators in tables weren't announcing state changes
+2. Focus management in modals was inconsistent
+3. Color contrast in disabled states was borderline
+4. Touch targets in date pickers were too small on mobile
+
+**AI Interface Findings:**
+
+1. Users need clear indication that they're interacting with AI
+2. Confidence indicators increase trust when accurate, destroy trust when not
+3. Streaming responses feel faster even when they take the same time
+4. Users want easy ways to provide feedback on AI outputs
+
+---
+
+## The Solution
+
+### Accessibility Improvements
+
+#### Data Table Enhancements
+
+I redesigned the sort announcement system for data tables:
+
+**Before:** Screen readers only announced the column name
+**After:** Full context announcement: "Name column, sorted ascending, activate to sort descending"
+
+I also added:
+- Visual sort indicators that meet contrast requirements
+- Row-level actions with proper focus management
+- Batch selection announcements
+
+#### Date Picker Rebuild
+
+The date picker received a comprehensive accessibility overhaul:
+
+- **Keyboard navigation**: Full calendar navigation with arrow keys
+- **Screen reader support**: Date announcements include context (e.g., "Tuesday, March 15, 2024, today")
+- **Touch targets**: Increased from 32px to 44px minimum
+- **Reduced motion**: Simplified animations when `prefers-reduced-motion` is enabled
+
+### AI Interface Patterns
+
+#### 1. AI Presence Indicator
+
+A consistent visual pattern that signals AI involvement:
+
+- **Icon**: A subtle "sparkle" icon that's become recognizable across IBM products
+- **Label**: Clear text like "AI-generated" or "AI-assisted"
+- **Placement**: Consistent top-right position across all AI components
+
+#### 2. Confidence Visualization
+
+A nuanced approach to showing AI confidence:
+
+- **High confidence (90%+)**: No indicator needed, presents as normal content
+- **Medium confidence (70-90%)**: Subtle warning with option to review
+- **Low confidence (under 70%)**: Clear warning with required user confirmation
+
+Key design decision: We don't show exact percentages, as research showed users misinterpret them (treating 85% as definitive, or being overly concerned about 92%).
+
+#### 3. Streaming Response Pattern
+
+For AI responses that stream in real-time:
+
+- **Typing indicator**: Animated dots that signal "AI is thinking"
+- **Progressive rendering**: Text appears as it's generated
+- **Completion signal**: Subtle animation when response is complete
+- **Edit affordance**: Clear "Edit" button appears only after completion
+
+#### 4. Feedback Component
+
+A standardized way for users to provide feedback on AI outputs:
+
+- **Binary feedback**: Thumbs up/down for quick rating
+- **Detailed feedback**: Optional text input for specific issues
+- **Categories**: Pre-defined options like "Incorrect," "Incomplete," "Inappropriate"
+- **Confirmation**: Clear acknowledgment that feedback was received
+
+---
+
+## Design Process
+
+### Collaboration Model
+
+Working on a design system requires intensive collaboration:
+
+- **Weekly syncs** with accessibility team
+- **Bi-weekly reviews** with the broader design system team
+- **Monthly presentations** to design leadership
+- **Quarterly alignment** with engineering on implementation priorities
+
+### Documentation Approach
+
+Every component change required comprehensive documentation:
+
+1. **Design spec**: Figma file with all states and variants
+2. **Usage guidelines**: When and how to use the component
+3. **Accessibility notes**: Specific considerations for assistive technologies
+4. **Migration guide**: How to update from previous versions
+5. **Code examples**: Working React and Web Components implementations
+
+### Testing Protocol
+
+Before any component shipped:
+
+1. **Design review**: Team critique and feedback
+2. **Accessibility audit**: Manual and automated testing
+3. **Engineering review**: Technical feasibility check
+4. **User testing**: Validation with real users
+5. **Documentation review**: Ensuring guides are clear and complete
+
+---
+
+## Outcome
+
+### Impact Metrics
+
+The accessibility improvements resulted in:
+
+- **15% reduction** in accessibility-related support tickets
+- **WCAG 2.2 AA compliance** across all updated components
+- **Positive feedback** from IBM's Accessibility Council
+
+The AI patterns have been adopted by:
+
+- **Watson Assistant** (IBM's conversational AI)
+- **Watson Studio** (AI development platform)
+- **30+ internal AI products** in development
+
+### Industry Recognition
+
+- Featured in **A11y Weekly** newsletter
+- Presented at **Inclusive Design 24** conference
+- Cited in multiple accessibility blogs as best-practice examples
+
+### Design System Growth
+
+During my tenure, Carbon Design System saw:
+
+- **40% increase** in component library usage
+- **New AI section** in design system with 12 patterns
+- **Updated accessibility documentation** across all components
+
+---
+
+## Reflection
+
+### What Made This Successful
+
+**1. User-centered approach to accessibility**
+
+Instead of treating accessibility as a checklist, we involved users with disabilities throughout the process. Their feedback shaped not just the technical implementation but the overall approach.
+
+**2. Cross-functional partnerships**
+
+The strongest solutions came from deep collaboration between design, engineering, and accessibility teams. No single discipline had all the answers.
+
+**3. Documentation as a first-class deliverable**
+
+Investing heavily in documentation meant components were adopted correctly. Good documentation reduced support burden and increased consistent usage.
+
+### Challenges Faced
+
+**1. Balancing scope with timeline**
+
+Enterprise design systems move carefully. Some improvements I wanted to make were descoped to maintain stability for existing users.
+
+**2. Coordinating across time zones**
+
+The Carbon team spans multiple continents. Async communication and clear documentation became essential skills.
+
+**3. Legacy support**
+
+Many products couldn't immediately adopt new components. Creating migration paths that respected existing implementations was complex.
+
+---
+
+## Key Learnings
+
+### On Accessibility
+
+> "Accessibility isn't a feature to add later - it's a quality to build in from the start."
+
+The most impactful accessibility improvements weren't bolt-on fixes; they were fundamental rethinks of how components work.
+
+### On AI Design
+
+> "The best AI interface is one where users feel in control, even when the AI is doing the heavy lifting."
+
+Trust is earned through transparency. Users who understand what AI can and can't do are more satisfied with AI-powered features.
+
+### On Design Systems
+
+> "A design system is never done - it evolves with the products and users it serves."
+
+The best design systems are living documents that adapt to new technologies, user needs, and design trends while maintaining stability for their users.
+
+---
+
+## Continuing Work
+
+My contributions continue to evolve as Carbon grows:
+
+- **AI patterns** are being expanded to cover more use cases
+- **Accessibility improvements** are rolling out to additional components
+- **Documentation** is being translated into multiple languages
+
+I remain an advisor to the Carbon team, contributing to strategic decisions about the system's future direction.

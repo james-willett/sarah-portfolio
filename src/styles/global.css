@@ -2,6 +2,15 @@
 @import 'tailwindcss';
 
 /*
+ * IMPORTANT: Tailwind v4 Dark Mode Configuration
+ * By default, Tailwind v4 uses prefers-color-scheme for dark mode.
+ * We want to use the .dark class strategy instead (manual toggle).
+ * This @variant directive tells Tailwind to only apply dark: variants
+ * when the .dark class is present on an ancestor element.
+ */
+@variant dark (&:where(.dark, .dark *));
+
+/*
  * ============================================================================
  * FONT SETUP
  * ============================================================================

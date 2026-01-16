@@ -1,0 +1,141 @@
+---
+/**
+ * Dynamic Project Page - Individual project/case study detail pages
+ *
+ * This page uses Astro's dynamic routing to generate a page for each project
+ * in the content collection. It:
+ * - Uses getStaticPaths() to generate routes from the projects collection
+ * - Fetches project data by slug
+ * - Renders the MDX content using the ProjectLayout component
+ * - Shows project metadata (client, role, timeline, tags, date)
+ * - Filters to only published projects in production, shows all in dev
+ */
+
+import { getCollection } from 'astro:content';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import { Image } from 'astro:assets';
+
+// Generate static paths for all projects
+// In production: only published projects
+// In development: all projects (so you can preview drafts)
+export async function getStaticPaths() {
+  const allProjects = await getCollection('projects');
+
+  // Filter based on environment
+  // import.meta.env.PROD is true in production builds, false in dev
+  const projects = allProjects.filter((project) => {
+    // In production, only show published projects
+    // In development, show all projects (including drafts)
+    return import.meta.env.DEV || project.data.published;
+  });
+
+  // Map each project to a path with the project as props
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+// Get the project from props (passed from getStaticPaths)
+const { project } = Astro.props;
+
+// Extract frontmatter data
+const { title, description, thumbnail, tags, date, client, role, timeline, liveUrl } =
+  project.data;
+
+// Render the MDX content
+// The render() function returns a Content component we can use in the template
+const { Content } = await project.render();
+
+// Format the date for display
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+});
+---
+
+<ProjectLayout project={project}>
+  {/* Hero Image - displayed below the header metadata */}
+  {
+    thumbnail && (
+      <div class="mb-12 -mx-6 md:-mx-0">
+        <Image
+          src={thumbnail}
+          alt={`${title} project thumbnail`}
+          class="w-full rounded-lg shadow-lg"
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+          loading="eager"
+        />
+      </div>
+    )
+  }
+
+  {/* Tags Section */}
+  {
+    tags && tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        {tags.map((tag) => (
+          <span class="px-3 py-1 text-sm rounded-full bg-zinc-100 text-foreground dark:bg-zinc-800 dark:text-foreground-dark">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )
+  }
+
+  {/* Project Date */}
+  <p class="text-sm text-muted dark:text-muted-dark mb-8">
+    Published: {formattedDate}
+  </p>
+
+  {/* MDX Content - this is where the case study content renders */}
+  <Content />
+
+  {/* Back to Design Link at bottom of content */}
+  <div class="mt-16 pt-8 border-t border-border dark:border-border-dark">
+    <a
+      href="/design"
+      class="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground dark:text-muted-dark dark:hover:text-foreground-dark transition-colors"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12.5 15L7.5 10L12.5 5"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+      View all projects
+    </a>
+  </div>
+</ProjectLayout>
+
+<style>
+  /*
+   * Additional styling for the project page content
+   * Most styling is handled by ProjectLayout's prose classes
+   */
+
+  /* Ensure hero image has proper aspect ratio on mobile */
+  @media (max-width: 768px) {
+    .mb-12.-mx-6 img {
+      border-radius: 0;
+    }
+  }
+
+  /* Tag pill hover effect */
+  .flex-wrap span:hover {
+    background-color: #e4e4e7;
+  }
+
+  .dark .flex-wrap span:hover {
+    background-color: #3f3f46;
+  }
+</style>

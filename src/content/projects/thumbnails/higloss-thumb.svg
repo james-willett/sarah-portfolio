@@ -1,0 +1,54 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with watercolor-inspired gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4c4d4"/>
+      <stop offset="20%" style="stop-color:#c9b8d4"/>
+      <stop offset="40%" style="stop-color:#d4d4e4"/>
+      <stop offset="60%" style="stop-color:#e4d4c4"/>
+      <stop offset="80%" style="stop-color:#f4e4d4"/>
+      <stop offset="100%" style="stop-color:#f9f4f4"/>
+    </linearGradient>
+    <radialGradient id="blob1" cx="30%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(180,160,200,0.4)"/>
+      <stop offset="100%" style="stop-color:transparent"/>
+    </radialGradient>
+    <radialGradient id="blob2" cx="70%" cy="60%" r="40%">
+      <stop offset="0%" style="stop-color:rgba(200,180,160,0.3)"/>
+      <stop offset="100%" style="stop-color:transparent"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Main background -->
+  <rect width="1200" height="800" fill="url(#bgGrad)"/>
+
+  <!-- Organic blobs for watercolor effect -->
+  <ellipse cx="360" cy="320" rx="300" ry="240" fill="url(#blob1)"/>
+  <ellipse cx="840" cy="480" rx="250" ry="200" fill="url(#blob2)"/>
+
+  <!-- Energy visualization elements -->
+  <g transform="translate(600, 400)">
+    <!-- Central circle -->
+    <circle cx="0" cy="0" r="120" fill="none" stroke="#4a4a5a" stroke-width="2" opacity="0.3"/>
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#4a4a5a" stroke-width="2" opacity="0.4"/>
+    <circle cx="0" cy="0" r="40" fill="#4a4a5a" opacity="0.2"/>
+
+    <!-- Energy rays -->
+    <g stroke="#4a4a5a" stroke-width="2" opacity="0.3">
+      <line x1="0" y1="-140" x2="0" y2="-180"/>
+      <line x1="99" y1="-99" x2="127" y2="-127"/>
+      <line x1="140" y1="0" x2="180" y2="0"/>
+      <line x1="99" y1="99" x2="127" y2="127"/>
+      <line x1="0" y1="140" x2="0" y2="180"/>
+      <line x1="-99" y1="99" x2="-127" y2="127"/>
+      <line x1="-140" y1="0" x2="-180" y2="0"/>
+      <line x1="-99" y1="-99" x2="-127" y2="-127"/>
+    </g>
+  </g>
+
+  <!-- HiGloss text -->
+  <text x="600" y="400" font-family="Georgia, serif" font-size="72" font-style="italic" fill="#4a4a5a" text-anchor="middle" dominant-baseline="middle">HiGloss</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="460" font-family="Arial, sans-serif" font-size="18" fill="#6a6a7a" text-anchor="middle">Energy Monitoring Experience</text>
+</svg>

@@ -1,0 +1,13 @@
+# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for Sarah's Portfolio
+
+# Allow all crawlers to access all content
+User-agent: *
+Allow: /
+
+# Sitemap location (update when sitemap is generated)
+# Sitemap: https://sarahdesign.com/sitemap.xml
+
+# Disallow admin or draft content (none currently)
+# Disallow: /admin/
+# Disallow: /drafts/

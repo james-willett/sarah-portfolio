@@ -1,0 +1,53 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark maroon background -->
+  <rect width="1200" height="800" fill="#5a2a2a"/>
+
+  <!-- Subtle texture pattern -->
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1" fill="#6a3a3a"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#dots)"/>
+
+  <!-- Central content area -->
+  <g transform="translate(600, 400)">
+    <!-- Stacked product icons -->
+    <g transform="translate(-200, -100)">
+      <!-- Product card 1 -->
+      <rect x="0" y="0" width="160" height="100" rx="8" fill="#7a4a4a"/>
+      <rect x="16" y="16" width="80" height="8" rx="4" fill="#9a6a6a"/>
+      <rect x="16" y="32" width="120" height="6" rx="3" fill="#8a5a5a"/>
+      <rect x="16" y="44" width="100" height="6" rx="3" fill="#8a5a5a"/>
+    </g>
+
+    <g transform="translate(-100, -40)">
+      <!-- Product card 2 -->
+      <rect x="0" y="0" width="160" height="100" rx="8" fill="#8a5a5a"/>
+      <rect x="16" y="16" width="80" height="8" rx="4" fill="#aa7a7a"/>
+      <rect x="16" y="32" width="120" height="6" rx="3" fill="#9a6a6a"/>
+      <rect x="16" y="44" width="100" height="6" rx="3" fill="#9a6a6a"/>
+    </g>
+
+    <g transform="translate(0, 20)">
+      <!-- Product card 3 (front) -->
+      <rect x="0" y="0" width="160" height="100" rx="8" fill="#9a6a6a"/>
+      <rect x="16" y="16" width="80" height="8" rx="4" fill="#ba8a8a"/>
+      <rect x="16" y="32" width="120" height="6" rx="3" fill="#aa7a7a"/>
+      <rect x="16" y="44" width="100" height="6" rx="3" fill="#aa7a7a"/>
+      <!-- Checkmark -->
+      <circle cx="130" cy="70" r="16" fill="#4a8a4a"/>
+      <path d="M122 70 L128 76 L140 64" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- Main text -->
+  <text x="600" y="300" font-family="Arial, sans-serif" font-size="48" font-weight="500" fill="#f5f5f5" text-anchor="middle">Shipped</text>
+  <text x="600" y="360" font-family="Arial, sans-serif" font-size="48" font-weight="500" fill="#f5f5f5" text-anchor="middle">Products</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="650" font-family="Arial, sans-serif" font-size="16" fill="#ba9a9a" text-anchor="middle">A Collection of Designs from Concept to Launch</text>
+
+  <!-- Decorative elements -->
+  <rect x="400" y="680" width="400" height="2" fill="#6a3a3a"/>
+</svg>

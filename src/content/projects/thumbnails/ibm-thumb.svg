@@ -1,0 +1,47 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark background -->
+  <rect width="1200" height="800" fill="#1a1a2e"/>
+
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#2a2a4e" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#grid)"/>
+
+  <!-- Central badge -->
+  <g transform="translate(600, 400)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="200" fill="none" stroke="#3a3a5e" stroke-width="2"/>
+    <circle cx="0" cy="0" r="180" fill="#2a2a4e"/>
+
+    <!-- Inner decorative ring -->
+    <circle cx="0" cy="0" r="160" fill="none" stroke="#4a4a6e" stroke-width="1" stroke-dasharray="8 4"/>
+
+    <!-- IBM-style stripes at bottom -->
+    <g transform="translate(-60, 80)">
+      <rect x="0" y="0" width="120" height="6" fill="#4a90d9"/>
+      <rect x="0" y="12" width="120" height="6" fill="#4a90d9"/>
+      <rect x="0" y="24" width="120" height="6" fill="#4a90d9"/>
+    </g>
+  </g>
+
+  <!-- Text elements -->
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#a0a0c0" text-anchor="middle" letter-spacing="4">BUSINESS</text>
+  <text x="600" y="390" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#f0f0ff" text-anchor="middle" letter-spacing="2">INTERNATIONAL</text>
+  <text x="600" y="430" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#a0a0c0" text-anchor="middle" letter-spacing="4">MACHINES</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="650" font-family="Arial, sans-serif" font-size="16" fill="#6a6a8a" text-anchor="middle">Carbon Design System Contributions</text>
+
+  <!-- Corner accents -->
+  <rect x="40" y="40" width="60" height="4" fill="#4a90d9"/>
+  <rect x="40" y="40" width="4" height="60" fill="#4a90d9"/>
+  <rect x="1100" y="40" width="60" height="4" fill="#4a90d9"/>
+  <rect x="1156" y="40" width="4" height="60" fill="#4a90d9"/>
+  <rect x="40" y="756" width="60" height="4" fill="#4a90d9"/>
+  <rect x="40" y="700" width="4" height="60" fill="#4a90d9"/>
+  <rect x="1100" y="756" width="60" height="4" fill="#4a90d9"/>
+  <rect x="1156" y="700" width="4" height="60" fill="#4a90d9"/>
+</svg>
