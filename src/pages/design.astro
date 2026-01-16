@@ -1,0 +1,101 @@
+---
+/**
+ * Design/Work Page - Portfolio grid showcasing all projects
+ *
+ * Displays all published projects from the content collection in a grid layout.
+ * Projects are sorted by the 'order' field and filtered to show only published work.
+ * Uses the ProjectCard component for consistent project display.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch all published projects, sorted by order field
+const allProjects = await getCollection('projects');
+const publishedProjects = allProjects
+  .filter((project) => project.data.published)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Design Work"
+  description="Portfolio showcasing my UX design projects, from AI experiences to product design."
+>
+  <main class="flex-1">
+    <!-- Page Header Section -->
+    <section class="max-w-content mx-auto px-6 py-12 md:py-16">
+      <div class="mb-12">
+        <!-- Page Title - matching homepage heading style -->
+        <h1
+          style="color: #3F3F3F; font-size: 48px; font-weight: 400; font-family: 'Space Grotesk', sans-serif;"
+          class="mb-4 dark:text-foreground-dark"
+        >
+          Design Work
+        </h1>
+        <!-- Intro Text -->
+        <p
+          style="color: #3F3F3F; font-size: 16px; line-height: 1.6;"
+          class="max-w-2xl dark:text-muted-dark"
+        >
+          A collection of my UX design projects, showcasing strategic thinking, visual craft, and user-centered design.
+        </p>
+      </div>
+
+      <!-- Projects Grid -->
+      {
+        publishedProjects.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {publishedProjects.map((project) => (
+              <ProjectCard
+                title={project.data.title}
+                description={project.data.description}
+                image={project.data.thumbnail}
+                imageAlt={`${project.data.title} project thumbnail`}
+                href={`/projects/${project.slug}`}
+                tags={project.data.tags}
+              />
+            ))}
+          </div>
+        ) : (
+          <!-- Empty State - shown when no published projects exist -->
+          <div class="py-16 text-center">
+            <div class="max-w-md mx-auto">
+              <svg
+                class="w-16 h-16 mx-auto mb-4 text-zinc-300 dark:text-zinc-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <h2
+                class="text-xl font-semibold text-foreground dark:text-foreground-dark mb-2"
+              >
+                No projects yet
+              </h2>
+              <p class="text-muted dark:text-muted-dark">
+                Check back soon for new design work.
+              </p>
+            </div>
+          </div>
+        )
+      }
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Responsive grid adjustments */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 36px !important;
+    }
+  }
+</style>
