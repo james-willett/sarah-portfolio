@@ -1,12 +1,5 @@
 {
   "mcpServers": {
-    "playwriter": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "playwriter@latest"
-      ]
-    },
     "chrome-devtools": {
       "command": "npx",
       "args": [
