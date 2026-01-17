@@ -9,6 +9,7 @@
  * - Consistent header and footer
  */
 
+import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -67,6 +68,9 @@ const fullTitle = title.includes('Sarah') ? title : `${title} | Sarah`;
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, siteUrl)} />
+
+    <!-- Enable View Transitions for smooth page navigation -->
+    <ClientRouter />
 
     <!-- Google Analytics (optional - will be added later if needed) -->
     <!-- {import.meta.env.PUBLIC_GA_TRACKING_ID && (
