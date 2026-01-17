@@ -32,86 +32,98 @@ const ogImage = thumbnail?.src || '/og-image.jpg';
   type="article"
 >
   <main class="flex-1">
-    <!-- Back Link (above the two-column layout) -->
-    <div class="px-6 pt-12 md:pt-16">
+    <!-- Main content wrapper - uses CSS Grid for TOC positioning -->
+    <div class="px-6 pt-12 md:pt-16 pb-16 md:pb-24">
       <div class="max-w-content mx-auto">
-        <a
-          href="/design"
-          class="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground mb-8 transition-colors"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Back to Design
-        </a>
-      </div>
-    </div>
+        <!-- Grid: TOC on left, content on right. TOC column starts at title level -->
+        <div class="lg:grid lg:grid-cols-[120px_1fr] lg:gap-8 xl:gap-16">
 
-    <!-- Main two-column layout: index on left, content on right -->
-    <div class="px-6 pb-16 md:pb-24">
-      <div class="max-w-content mx-auto">
-        <div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12">
-          <!-- Floating Index (sticky sidebar) - hidden on mobile -->
+          <!-- Floating sidebar: Back link + TOC - hidden on mobile -->
           <aside class="hidden lg:block">
-            <div class="sticky top-32">
+            <div class="sticky top-24">
+              <!-- Back Link - 20px Bold per Figma -->
+              <a
+                href="/design"
+                class="inline-flex items-center gap-2 text-xl font-bold text-foreground hover:text-muted transition-colors mb-8"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back
+              </a>
+              <!-- Floating Index -->
               <FloatingIndex />
             </div>
           </aside>
 
-          <!-- Main Content Column: Hero + Article -->
+          <!-- Mobile Back Link (visible only on mobile) -->
+          <a
+            href="/design"
+            class="lg:hidden inline-flex items-center gap-2 text-xl font-bold text-foreground hover:text-muted transition-colors mb-8"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Back
+          </a>
+
+          <!-- Main content column -->
           <div>
-            <!-- Project Hero Section -->
-            <section class="mb-12">
-              <!-- Project Title -->
-              <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground">
-                {title}
-              </h1>
+            <!-- Project Hero Section - offset left to align with nav (centered on full page, not just content column) -->
+            <section class="mb-12 lg:-ml-[162px] xl:-ml-[178px]">
+              <div class="max-w-[754px] flex flex-col items-center gap-6 text-center mx-auto">
+                <!-- Project Title - 64px, Black weight, centered -->
+                <h1 class="text-5xl md:text-[64px] font-black leading-[1.2] text-foreground capitalize">
+                  {title}
+                </h1>
 
-              <!-- Project Description -->
-              <p class="text-lg md:text-xl text-muted mb-8 max-w-3xl">
-                {description}
-              </p>
-
-              <!-- Project Metadata -->
-              <div class="flex flex-wrap gap-6 md:gap-8 text-sm border-t border-border pt-6">
-                {client && (
-                  <div>
-                    <dt class="text-muted mb-1">Client</dt>
-                    <dd class="text-foreground font-medium">{client}</dd>
-                  </div>
-                )}
-                {role && (
-                  <div>
-                    <dt class="text-muted mb-1">Role</dt>
-                    <dd class="text-foreground font-medium">{role}</dd>
-                  </div>
-                )}
-                {timeline && (
-                  <div>
-                    <dt class="text-muted mb-1">Timeline</dt>
-                    <dd class="text-foreground font-medium">{timeline}</dd>
-                  </div>
-                )}
-                {liveUrl && (
-                  <div>
-                    <dt class="text-muted mb-1">Live Site</dt>
-                    <dd>
-                      <a
-                        href={liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-accent hover:underline font-medium inline-flex items-center gap-1"
-                      >
-                        View Project
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 8.66667V12.6667C12 13.0203 11.8595 13.3594 11.6095 13.6095C11.3594 13.8595 11.0203 14 10.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V5.33333C2 4.97971 2.14048 4.64057 2.39052 4.39052C2.64057 4.14048 2.97971 4 3.33333 4H7.33333M10 2H14M14 2V6M14 2L6.66667 9.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </a>
-                    </dd>
-                  </div>
-                )}
+                <!-- Project Description - 24px, Bold weight, centered -->
+                <p class="text-xl md:text-2xl font-bold leading-[1.2] text-foreground">
+                  {description}
+                </p>
               </div>
             </section>
+
+            <!-- Project Metadata and Content -->
+            <!-- Project Metadata -->
+            <div class="flex flex-wrap gap-6 md:gap-8 text-sm border-t border-border pt-6 mb-12">
+              {client && (
+                <div>
+                  <dt class="text-muted mb-1">Client</dt>
+                  <dd class="text-foreground font-medium">{client}</dd>
+                </div>
+              )}
+              {role && (
+                <div>
+                  <dt class="text-muted mb-1">Role</dt>
+                  <dd class="text-foreground font-medium">{role}</dd>
+                </div>
+              )}
+              {timeline && (
+                <div>
+                  <dt class="text-muted mb-1">Timeline</dt>
+                  <dd class="text-foreground font-medium">{timeline}</dd>
+                </div>
+              )}
+              {liveUrl && (
+                <div>
+                  <dt class="text-muted mb-1">Live Site</dt>
+                  <dd>
+                    <a
+                      href={liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-accent hover:underline font-medium inline-flex items-center gap-1"
+                    >
+                      View Project
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 8.66667V12.6667C12 13.0203 11.8595 13.3594 11.6095 13.6095C11.3594 13.8595 11.0203 14 10.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V5.33333C2 4.97971 2.14048 4.64057 2.39052 4.39052C2.64057 4.14048 2.97971 4 3.33333 4H7.33333M10 2H14M14 2V6M14 2L6.66667 9.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </dd>
+                </div>
+              )}
+            </div>
 
             <!-- Case Study Content -->
             <article class="prose prose-lg">
