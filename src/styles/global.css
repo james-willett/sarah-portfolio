@@ -85,24 +85,30 @@
 }
 
 /*
- * Sarah's gradient background (from Figma specs)
- * Linear gradient at 188 degrees with soft, warm tones
+ * Sarah's gradient background (from Figma specs - node 1:772)
+ * Linear gradient at 90 degrees with subtle color shifts
  */
 body {
   font-family: "Inter", system-ui, sans-serif;
   color: #3F3F3F;
   /*
-   * Gradient background from Figma:
-   * Direction: 188 degrees
-   * Colors: #F3F3F3 -> #F4F4F9 -> #FCF8F8 -> #FDFAF6 -> #F8F8F8
+   * Gradient background from Figma Color Palette:
+   * Direction: 90deg (horizontal, left to right)
+   * Color stops with subtle hue shifts:
+   *   0%  - hsla(0, 0%, 95%, 1)    - neutral gray
+   *   11% - hsla(240, 29%, 97%, 1) - slight blue tint
+   *   23% - hsla(340, 50%, 98%, 1) - slight pink tint
+   *   35% - hsla(34, 64%, 98%, 1)  - slight warm/yellow tint
+   *   100% - hsla(0, 0%, 98%, 1)   - neutral off-white
    */
+  background: hsla(0, 0%, 95%, 1);
   background: linear-gradient(
-    188deg,
-    #F3F3F3 0%,
-    #F4F4F9 25%,
-    #FCF8F8 50%,
-    #FDFAF6 75%,
-    #F8F8F8 100%
+    90deg,
+    hsla(0, 0%, 95%, 1) 0%,
+    hsla(240, 29%, 97%, 1) 11%,
+    hsla(340, 50%, 98%, 1) 23%,
+    hsla(34, 64%, 98%, 1) 35%,
+    hsla(0, 0%, 98%, 1) 100%
   );
   /* Ensure gradient covers full viewport height */
   min-height: 100vh;

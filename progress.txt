@@ -370,11 +370,13 @@ Note: Each step requires detailed context from James before implementation.
       * Gap: 8px between items
     - Verify: Menu transitions match Figma design exactly ✓
 
-[ ] Step 28.3: Update background gradient site-wide
-    - Get exact gradient values from Figma design file
-    - Update global.css with correct gradient
-    - Apply consistently across all pages
-    - Verify: Background matches Figma design
+[✓] Step 28.3: Update background gradient site-wide
+    - Got exact gradient values from Figma design file (node 1:772)
+    - Updated global.css with correct 90deg horizontal gradient
+    - Gradient CSS: linear-gradient(90deg, hsla(0,0%,95%,1) 0%, hsla(240,29%,97%,1) 11%,
+      hsla(340,50%,98%,1) 23%, hsla(34,64%,98%,1) 35%, hsla(0,0%,98%,1) 100%)
+    - Applied consistently across all pages (Home, Design, Contact)
+    - Verify: Background matches Figma design ✓
 
 [ ] Step 28.4: Add floating project index (table of contents)
     - Create left-side navigation for project case study pages
