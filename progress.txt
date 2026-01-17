@@ -5,7 +5,7 @@ Project Start Date: 2026-01-13
 Last Updated: 2026-01-16
 
 =================================================================
-CURRENT STATUS: PHASE 7 COMPLETE - SAMPLE CONTENT CREATED
+CURRENT STATUS: PHASE 7.5 PENDING - SARAH'S DESIGN REFINEMENTS
 =================================================================
 
 -------------------------------------------------------------------
@@ -342,6 +342,57 @@ PHASE 7: SAMPLE CONTENT [COMPLETE]
     - Build completed successfully: 7 pages, 12 optimized images
 
 -------------------------------------------------------------------
+PHASE 7.5: SARAH'S FEEDBACK - DESIGN REFINEMENTS [NOT STARTED]
+-------------------------------------------------------------------
+Priority: Complete before continuing with Phase 8+
+Note: Each step requires detailed context from James before implementation.
+
+[ ] Step 28.1: Install and configure Figma MCP server
+    - CRITICAL: Required before other steps (provides access to design specs)
+    - Install official Figma MCP server (desktop version)
+    - Prerequisites: Figma desktop app (latest), Dev Mode enabled
+    - Server runs locally at http://127.0.0.1:3845/mcp
+    - Configure Claude Code to connect to the MCP endpoint
+    - Docs: https://help.figma.com/hc/en-us/articles/32132100833559
+    - Verify: Can query Figma design file from Claude Code
+
+[ ] Step 28.2: Fix top menu transitions and styling
+    - Add smooth transitions between selected/unselected nav items
+    - Match gradient styling to Figma specs
+    - Match highlight/outline styling (box around selected item) to Figma
+    - Verify: Menu transitions match Figma design exactly
+
+[ ] Step 28.3: Update background gradient site-wide
+    - Get exact gradient values from Figma design file
+    - Update global.css with correct gradient
+    - Apply consistently across all pages
+    - Verify: Background matches Figma design
+
+[ ] Step 28.4: Add floating project index (table of contents)
+    - Create left-side navigation for project case study pages
+    - Shows sections within the project (Overview, Challenge, Solution, etc.)
+    - Sticky/fixed positioning - always visible while scrolling
+    - Clicking a link jumps to that section
+    - Verify: Index works on all project pages, smooth scroll behavior
+
+[ ] Step 28.5: Fix spacing to match Figma specifications
+    - Extract exact spacing values from Figma (column grids, Option+hover)
+    - Fix spacing between the 3 projects on design page
+    - Apply correct spacing throughout the site
+    - Verify: Spacing matches Figma design exactly
+
+[ ] Step 28.6: Fix "Hi I'm Sarah" text jump on page load
+    - Investigate cause (likely font loading or CSS reflow)
+    - Implement fix (font preloading, size-adjust, or layout reserve)
+    - Verify: No visible layout shift on page load
+
+[ ] Step 28.7: Ensure consistent heading typography
+    - Audit all headings across the site
+    - Ensure "Hi I'm Sarah" and "Projects" use same typography
+    - Apply consistent heading styles throughout
+    - Verify: All headings match design system
+
+-------------------------------------------------------------------
 PHASE 8: STYLING & RESPONSIVENESS [NOT STARTED]
 -------------------------------------------------------------------
 [ ] Step 29: Apply Tailwind styling to all components
@@ -594,14 +645,18 @@ THINKING PAGE DECISION:
 =================================================================
 NEXT STEPS
 =================================================================
-1. Start PHASE 8: Styling & Responsiveness (Steps 29-32)
-   - Apply final Tailwind styling polish
-   - Test responsive design at all breakpoints
-   - Add transitions and hover states
-   - Verify dark mode styling
-2. Replace placeholder SVG thumbnails with actual project images
-3. Purchase and integrate PP Radio Grotesk font
-4. Continue with remaining phases as outlined in TECHNICAL_PLAN.MD
+1. **PRIORITY: Complete PHASE 7.5 - Sarah's Design Refinements**
+   - Step 28.1: Install Figma MCP server (FIRST - enables all other steps)
+   - Step 28.2: Fix top menu transitions and styling
+   - Step 28.3: Update background gradient site-wide
+   - Step 28.4: Add floating project index/TOC
+   - Step 28.5: Fix spacing to match Figma specs
+   - Step 28.6: Fix "Hi I'm Sarah" text jump
+   - Step 28.7: Ensure consistent heading typography
+2. Then continue with PHASE 8: Styling & Responsiveness (Steps 29-32)
+3. Replace placeholder SVG thumbnails with actual project images
+4. Purchase and integrate PP Radio Grotesk font
+5. Continue with remaining phases as outlined in TECHNICAL_PLAN.MD
 
 ADDITIONAL PHASE 5 NOTES:
 - All three static pages created successfully

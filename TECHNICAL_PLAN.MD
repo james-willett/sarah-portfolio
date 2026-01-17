@@ -1,7 +1,7 @@
 # Sarah's Portfolio Website - Technical Specification
 
-> **Last Updated:** 2026-01-13
-> **Status:** Finalized after stakeholder interview
+> **Last Updated:** 2026-01-17
+> **Status:** Updated with Sarah's design feedback (Phase 7 added)
 > **Deadline:** 2-3 weeks (hard deadline)
 
 ---
@@ -759,6 +759,46 @@ Add scroll reveal animations
 - [ ] Write README documentation
 - [ ] Handoff to Sarah
 
+### Phase 7: Design Refinements - Sarah's Feedback (Added 2026-01-17)
+
+> **Priority:** Complete before final polish and deployment
+> **Prerequisite:** Figma MCP server must be installed first to access design specs
+
+- [ ] **Install Figma MCP server** (CRITICAL - enables all other refinements)
+  - Official Figma desktop MCP server
+  - Requires: Figma desktop app (latest), Dev Mode (Shift+D)
+  - Server endpoint: `http://127.0.0.1:3845/mcp`
+  - Configure Claude Code to connect to MCP endpoint
+
+- [ ] **Fix top menu transitions and styling**
+  - Smooth transitions between selected/unselected states
+  - Match gradient styling to Figma specs
+  - Match highlight/outline (box around selected item) to Figma
+
+- [ ] **Update background gradient site-wide**
+  - Extract exact gradient values from Figma
+  - Apply consistently across all pages
+
+- [ ] **Add floating project index (table of contents)**
+  - Left-side navigation for project case study pages
+  - Shows sections: Overview, Challenge, Solution, etc.
+  - Sticky/fixed positioning - always visible while scrolling
+  - Click to jump to section with smooth scroll
+
+- [ ] **Fix spacing to match Figma specifications**
+  - Extract spacing from Figma column grids (Option+hover for distances)
+  - Fix spacing between projects on design page
+  - Apply correct spacing throughout site
+
+- [ ] **Fix "Hi I'm Sarah" text jump on page load**
+  - Likely cause: font loading or CSS reflow
+  - Potential fixes: font preloading, size-adjust, layout reservation
+
+- [ ] **Ensure consistent heading typography**
+  - Audit all headings across site
+  - Unify "Hi I'm Sarah" and "Projects" heading styles
+  - Apply consistent heading styles from design system
+
 ---
 
 ## Testing & Validation
@@ -890,6 +930,20 @@ See `/reference-images/` folder:
 - Config-driven nav for flexibility without code changes
 - Normalized tag slugs for consistency across content
 
+**Sarah's Feedback Session (2026-01-17):**
+
+After reviewing the initial implementation, Sarah requested the following refinements:
+
+- **Figma MCP Integration** - Install official Figma MCP server to enable accurate design-to-code workflow
+- **Menu Transitions** - Current nav lacks smooth transitions; needs gradient and outline styling per Figma
+- **Background Gradient** - Site gradient needs updating to match Figma specs exactly
+- **Project Index/TOC** - Case study pages need a floating left-side table of contents for navigation
+- **Spacing Accuracy** - Spacing between elements (especially projects) must match Figma column grids
+- **Layout Shift Fix** - "Hi I'm Sarah" text has a brief jump on load (font/CSS issue)
+- **Heading Consistency** - Typography varies between headings; needs unified styling
+
+These refinements are captured in Phase 7 of the Implementation Phases section.
+
 ---
 
-_Last updated: 2026-01-13 - Finalized after comprehensive stakeholder interview_
+_Last updated: 2026-01-17 - Updated with Sarah's design feedback_
