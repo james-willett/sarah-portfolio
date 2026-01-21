@@ -7,7 +7,7 @@
  * - "Hi I'm Sarah" heading with PP Radio Grotesk styling
  * - Two paragraphs of description text
  * - "Contact me" outline button
- * - Bento-box grid with 4 project showcases arranged asymmetrically
+ * - Bento-box grid with 3 project showcases arranged asymmetrically
  */
 
 import { Image } from 'astro:assets';
@@ -17,7 +17,6 @@ import Button from '../components/Button.astro';
 // Import project images
 import hiGlossImg from '../assets/projects/hi-gloss.png';
 import ibmImg from '../assets/projects/ibm.png';
-import willettWayImg from '../assets/projects/willett-way.png';
 ---
 
 <BaseLayout
@@ -74,16 +73,8 @@ import willettWayImg from '../assets/projects/willett-way.png';
             </a>
           </div>
 
-          <!-- Row 2: Willett Way + Shipped Products -->
+          <!-- Row 2: Shipped Products -->
           <div class="bento-row-2">
-            <a href="/projects/willett-way" class="bento-link" aria-label="View The Willett Way project">
-              <Image
-                src={willettWayImg}
-                alt="The Willett Way project"
-                class="img-willett"
-                width={300}
-              />
-            </a>
             <a href="/projects/shipped-products" class="bento-shipped" aria-label="View Shipped Products">
               <span class="shipped-text">Shipped</span>
               <span class="shipped-text">Products</span>
@@ -137,12 +128,6 @@ import willettWayImg from '../assets/projects/willett-way.png';
     margin-top: -120px;
   }
 
-  .img-willett {
-    width: 260px;
-    height: auto;
-    margin-right: 10px;
-  }
-
   /* Shipped Products box */
   .bento-shipped {
     display: flex;
@@ -179,9 +164,6 @@ import willettWayImg from '../assets/projects/willett-way.png';
       width: 380px;
       margin-top: -140px;
     }
-    .img-willett {
-      width: 300px;
-    }
     .bento-shipped {
       width: 220px;
       height: 200px;
@@ -200,9 +182,6 @@ import willettWayImg from '../assets/projects/willett-way.png';
       width: 340px;
     }
     .img-ibm {
-      width: 180px;
-    }
-    .img-willett {
       width: 180px;
     }
     .bento-shipped {
@@ -230,10 +209,6 @@ import willettWayImg from '../assets/projects/willett-way.png';
     }
     .img-ibm {
       width: 140px;
-    }
-    .img-willett {
-      width: 140px;
-      margin-right: 0;
     }
     .bento-shipped {
       width: 130px;

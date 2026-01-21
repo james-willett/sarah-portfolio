@@ -1,54 +1,20 @@
-# Sarah's Portfolio - Project Instructions
+# Sarah's Portfolio
 
-## Quick Context
+UX designer portfolio built with Astro, TypeScript, and Tailwind CSS.
 
-Building a portfolio website for Sarah (UX Designer) using Astro, TypeScript, and Tailwind CSS. Portfolio only - no blog.
+## Working on This Project
 
-**Deadline:** 2-3 weeks (hard)
+- **Update [progress.txt](./progress.txt)** after completing steps (mark `[✓]`)
+- **All components require dark mode** - include `dark:` variants
+- **Config-driven settings** live in `astro.config.mjs` (navigation, featured projects, socials)
+- **Drafts** (`published: false`) show in dev only
 
-## Key Documents
+## Terminology
 
-- **[TECHNICAL_PLAN.MD](./TECHNICAL_PLAN.MD)** - Full technical spec with all decisions
-- **[PRD.MD](./PRD.MD)** - Product requirements and success criteria
-- **[progress.txt](./progress.txt)** - Implementation tracker (update as you work)
+- **"Project"**, **"case study"**, and **"portfolio item"** all refer to the same thing
+- These are MDX files in `/src/content/projects/`
+- The Astro content collection is named `projects`
 
-## Tech Stack
+## Reference
 
-- Astro 4.x + MDX
-- TypeScript (strict)
-- Tailwind CSS (dark mode via `class` strategy)
-- Framer Motion (scroll animations)
-- GLightbox (image lightbox)
-- Netlify (hosting + forms)
-
-## Important Conventions
-
-1. **Update progress.txt** - Mark steps `[✓]` as you complete them
-2. **Content uses MDX** - Projects are `.mdx` files in `src/content/`
-3. **Config-driven** - Navigation, featured projects, and socials live in `astro.config.mjs`
-4. **Dark mode required** - All components need `dark:` variants
-5. **Drafts dev-only** - `published: false` content shows in dev, hidden in production
-
-## File Structure
-
-```
-src/
-├── components/     # Reusable UI (Header, Footer, Cards, etc.)
-├── layouts/        # Page layouts (Base, Project)
-├── pages/          # Routes
-├── content/        # MDX content (projects/)
-├── lib/            # Utilities (tags.ts)
-└── assets/         # Images (optimized by Astro)
-```
-
-## Quick Commands
-
-```bash
-npm run dev      # Start dev server (localhost:4321)
-npm run build    # Production build
-npm run preview  # Preview production build
-```
-
-## When In Doubt
-
-Refer to `TECHNICAL_PLAN.MD` - it has detailed specs for every feature, component schemas, animation configs, and the full implementation checklist.
+Full technical specs, component schemas, and implementation details: **[TECHNICAL_PLAN.MD](./TECHNICAL_PLAN.MD)**

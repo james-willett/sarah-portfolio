@@ -14,7 +14,6 @@ export const siteConfig = {
     { label: 'Thinking', href: '/thinking' },
     { label: 'Contact', href: '/contact' },
   ],
-  featuredProjects: ['higloss-energy', 'ibm', 'shipped-products'],
   social: {
     linkedin: 'https://linkedin.com/in/sarah',
     dribbble: 'https://dribbble.com/sarah',
